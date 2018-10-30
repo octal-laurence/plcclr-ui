@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -209,6 +209,7 @@ function (_React$Component) {
     value: function render() {
       var _this2 = this;
 
+      var supreme = this.props.supreme;
       var applicantInfo = this.props.applicantInfo;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         padding: "100px"
@@ -309,7 +310,7 @@ function (_React$Component) {
         onClick: function onClick(e) {
           e.preventDefault();
 
-          _this2.props.switchPageHandler();
+          _this2.supreme.switchPageHandler('applicantIDPhoto');
         }
       }, "Confirm and Go to Next Tab"))));
     }
@@ -396,7 +397,7 @@ function (_React$Component) {
     key: "componentDidUpdate",
     value: function componentDidUpdate() {
       if (this.state.fingerPrintSubj !== '') {
-        window.REGIONFINGERPRINT.onStart(); // console.log(window.REGIONFINGERPRINT.onStart());
+        window.REGIONFINGERPRINT.onStart();
       }
     }
   }, {
@@ -854,6 +855,7 @@ function (_React$Component) {
     _this.renderNavTabs = _this.renderNavTabs.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.applicantInfoInputHandler = _this.applicantInfoInputHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.switchTabHandler = _this.switchPageHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.submitApplicantEntry = _this.submitApplicantEntry.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
@@ -874,6 +876,40 @@ function (_React$Component) {
       this.setState({
         navTabs: _objectSpread({}, navTabsStat, _defineProperty({}, tab, 1))
       });
+    }
+  }, {
+    key: "submitApplicantEntry",
+    value: function submitApplicantEntry() {
+      var applicantData = _objectSpread({}, this.state.applicantInfo, {
+        applicantIDPhoto: this.state.applicantIDPhoto.blob,
+        applicantFingerPrint: this.state.applicantFingerPrint,
+        applicantSignature: this.state.applicantSignature.blob
+      });
+
+      console.log(applicantData);
+      fetch('http://localhost:8000/PoliceClearanceCertification/testpush', {
+        body: JSON.stringify(applicantData),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Wwdg29Kvf2SE7Jb7aN3tXIkh9caXFCSZ7RQ7eqrnG7Gh6/DqxNayAc9jFFBEh7SuOZ2p0MH3DC8o1eWSvW9SmcpW1+Arq4Ims9Fon+AIL/i9Zp1eFkWrOiMche5D2t8Ur8+z5LYt5xME/ynPlXUDonww2tISFsEOoBVCSURaeCE='
+        },
+        method: 'POST'
+      }).then(function (response) {
+        return response.json();
+      }).then(function (result) {
+        console.log(result);
+      }).catch(function (err) {
+        console.log(err);
+      }); // fetch(url, {
+      //   body: JSON.stringify(params),
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     ...customHeaders,
+      //   },
+      //   method,
+      // })
+      // console.log(fetch);
+      // console.log(applicantData);
     }
   }, {
     key: "componentDidMount",
@@ -913,7 +949,8 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
         onSubmit: function onSubmit(e) {
           e.preventDefault();
-          console.log(_this3.state);
+
+          _this3.submitApplicantEntry();
         }
       }, this.state.navTabs.applicantInfo === 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_applicantInfo__WEBPACK_IMPORTED_MODULE_9__["default"], {
         applicantInfoInputHandler: this.applicantInfoInputHandler,
@@ -959,10 +996,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-dom */ "react-dom");
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _ui_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/box */ "./pages/ui/box.js");
-/* harmony import */ var _ui_inputText__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ui/inputText */ "./pages/ui/inputText.js");
-/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ui/button */ "./pages/ui/button.js");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _ui_box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ui/box */ "./pages/ui/box.js");
+/* harmony import */ var _ui_inputText__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ui/inputText */ "./pages/ui/inputText.js");
+/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ui/button */ "./pages/ui/button.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -986,6 +1029,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var Signature =
 /*#__PURE__*/
 function (_React$Component) {
@@ -998,20 +1042,97 @@ function (_React$Component) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(Signature).call(this, props));
     _this.supreme = props.supreme;
+    _this.state = {
+      signatureBlob: '',
+      librarySignatureController: 0,
+      librarySignatureCapture: 0
+    };
     return _this;
   }
 
   _createClass(Signature, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.setState({
+        librarySignatureController: 1
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var _this2 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Signature"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Write Digital Signature.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Content..."), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      var supreme = this.props.supreme;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_3__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Signature"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Write Digital Signature.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_3__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        id: "signature-pad",
+        className: "signature-pad"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signature-pad--body",
+        align: "center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: supreme.state.applicantSignature.blob,
+        style: {
+          display: supreme.state.applicantSignature.blob !== '' ? 'block' : 'none'
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("canvas", {
+        id: "cvs-signature",
+        style: {
+          borderStyle: 'groove',
+          display: !(supreme.state.applicantSignature.blob !== '') ? 'block' : 'none'
+        }
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signature-pad--footer"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "description",
+        align: "center"
+      }, "Sign above"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "signature-pad--actions",
+        align: "center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "button clear",
+        onClick: function onClick(e) {
+          supreme.setState({
+            applicantSignature: _objectSpread({}, supreme.state.applicantSignature, {
+              blob: ''
+            })
+          }, function () {
+            window.signaturePad.clear();
+
+            _this2.setState({
+              librarySignatureCapture: 0
+            });
+          });
+        }
+      }, "Clear"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "button",
+        "data-action": "change-color"
+      }, "Change color"), "\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        className: "button",
+        onClick: function onClick(e) {
+          var dataURL = window.signaturePad.toDataURL("image/jpeg");
+          supreme.setState({
+            applicantSignature: _objectSpread({}, supreme.state.applicantSignature, {
+              blob: dataURL
+            })
+          }, function () {
+            return _this2.setState({
+              librarySignatureCapture: 1
+            });
+          });
+        }
+      }, "Capture")))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_3__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_5__["default"], {
         type: "button",
         onClick: function onClick(e) {
           _this2.supreme.switchPageHandler('summary');
         }
-      }, "Confirm and Go to Next Tab")));
+      }, "Confirm and Go to Next Tab")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(next_head__WEBPACK_IMPORTED_MODULE_2___default.a, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
+        src: "/static/sdk/signature/signature_pad.umd.js"
+      }), this.state.librarySignatureController === 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("script", {
+        src: "/static/sdk/signature/sigapp.js"
+      })));
     }
   }]);
 
@@ -2486,7 +2607,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!********************************************************!*\
   !*** multi ./pages/client/certification-form/index.js ***!
   \********************************************************/

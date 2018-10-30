@@ -22,7 +22,6 @@ class FingerPrint extends React.Component {
   componentDidUpdate() {
     if (this.state.fingerPrintSubj !== '') {
       window.REGIONFINGERPRINT.onStart();
-      // console.log(window.REGIONFINGERPRINT.onStart());
     }
   }
   renderFingerPrintProjector() {

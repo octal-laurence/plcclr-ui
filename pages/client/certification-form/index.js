@@ -82,6 +82,7 @@ class CertificationForm extends React.Component {
     this.renderNavTabs = this.renderNavTabs.bind(this);
     this.applicantInfoInputHandler = this.applicantInfoInputHandler.bind(this);
     this.switchTabHandler = this.switchPageHandler.bind(this);
+    this.submitApplicantEntry = this.submitApplicantEntry.bind(this);
   }
   applicantInfoInputHandler(field, value) {
     this.setState({
@@ -103,6 +104,43 @@ class CertificationForm extends React.Component {
         [tab]: 1
       }
     });
+  }
+  submitApplicantEntry() {
+    const applicantData = {
+      ...this.state.applicantInfo,
+      applicantIDPhoto: this.state.applicantIDPhoto.blob,
+      applicantFingerPrint: this.state.applicantFingerPrint,
+      applicantSignature: this.state.applicantSignature.blob
+    }
+
+    console.log(applicantData);
+
+    fetch('http://localhost:8000/PoliceClearanceCertification/testpush', {
+      body: JSON.stringify(applicantData),
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Wwdg29Kvf2SE7Jb7aN3tXIkh9caXFCSZ7RQ7eqrnG7Gh6/DqxNayAc9jFFBEh7SuOZ2p0MH3DC8o1eWSvW9SmcpW1+Arq4Ims9Fon+AIL/i9Zp1eFkWrOiMche5D2t8Ur8+z5LYt5xME/ynPlXUDonww2tISFsEOoBVCSURaeCE='
+      },
+      method: 'POST',
+    })
+    .then(response => response.json())
+    .then(result => {
+      console.log(result);
+    })
+    .catch(err => {
+      console.log(err);
+    });
+    // fetch(url, {
+    //   body: JSON.stringify(params),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     ...customHeaders,
+    //   },
+    //   method,
+    // })
+
+    // console.log(fetch);
+    // console.log(applicantData);
   }
   componentDidMount() {
     this.switchPageHandler('applicantInfo');
@@ -134,7 +172,7 @@ class CertificationForm extends React.Component {
             <form
               onSubmit={(e) => {
                 e.preventDefault();
-                console.log(this.state);
+                this.submitApplicantEntry();
               }}
             >
               { this.state.navTabs.applicantInfo === 1 && 

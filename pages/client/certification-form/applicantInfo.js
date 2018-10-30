@@ -18,6 +18,7 @@ class ApplicantInfo extends React.Component {
     this.props.applicantInfoInputHandler(name, value);
   }
   render() {
+    const supreme = this.props.supreme;
     const applicantInfo = this.props.applicantInfo;
     return (
       <div padding="100px">
@@ -208,7 +209,7 @@ class ApplicantInfo extends React.Component {
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                this.props.switchPageHandler();
+                this.supreme.switchPageHandler('applicantIDPhoto');
               }}
             >
               Confirm and Go to Next Tab

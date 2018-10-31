@@ -10,6 +10,7 @@ class Summary extends React.Component {
     super(props);
   }
   render() {
+    const supreme = this.props.supreme;
     return (
       <div>
         <Box>
@@ -21,6 +22,16 @@ class Summary extends React.Component {
           </p>
         </Box>
         <hr />
+        <Box>
+          { Object.entries(supreme.state.applicantInfo)
+            .map(([k, v]) => [(
+              <Box key={k}>
+                {k} :&nbsp;
+                <label><u>{v}</u></label>
+              </Box>
+            ), (<br />)].map((elem) => elem)) 
+          }
+        </Box>
       </div>
     );
   }

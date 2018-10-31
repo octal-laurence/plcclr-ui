@@ -16,6 +16,8 @@ import ApplicantFingerPrint from './fingerPrint';
 import ApplicantSignature from './signature';
 import ApplicantInfoSummary from './summary';
 
+import PlcclrAPI from '../../../api_services/plcclr-api';
+
 class CertificationForm extends React.Component {
   constructor(props) {
     super(props);
@@ -106,6 +108,7 @@ class CertificationForm extends React.Component {
     });
   }
   submitApplicantEntry() {
+    const plcclr = new PlcclrAPI();
     const applicantData = {
       ...this.state.applicantInfo,
       applicantIDPhoto: this.state.applicantIDPhoto.blob,
@@ -115,13 +118,12 @@ class CertificationForm extends React.Component {
 
     console.log(applicantData);
 
-    fetch('http://localhost:8000/PoliceClearanceCertification/testpush', {
-      body: JSON.stringify(applicantData),
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': 'Wwdg29Kvf2SE7Jb7aN3tXIkh9caXFCSZ7RQ7eqrnG7Gh6/DqxNayAc9jFFBEh7SuOZ2p0MH3DC8o1eWSvW9SmcpW1+Arq4Ims9Fon+AIL/i9Zp1eFkWrOiMche5D2t8Ur8+z5LYt5xME/ynPlXUDonww2tISFsEOoBVCSURaeCE='
-      },
-      method: 'POST',
+    plcclr.newApplicantEntry({
+      ...applicantData,
+      machineId: 'DDDDD',
+      postalCode: 'DDDDD',
+      station: 'DDDDD',
+      stationName: 'DDDDD'
     })
     .then(response => response.json())
     .then(result => {
@@ -130,17 +132,6 @@ class CertificationForm extends React.Component {
     .catch(err => {
       console.log(err);
     });
-    // fetch(url, {
-    //   body: JSON.stringify(params),
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     ...customHeaders,
-    //   },
-    //   method,
-    // })
-
-    // console.log(fetch);
-    // console.log(applicantData);
   }
   componentDidMount() {
     this.switchPageHandler('applicantInfo');
@@ -192,7 +183,7 @@ class CertificationForm extends React.Component {
                 <ApplicantSignature supreme={this} />
               }
               { this.state.navTabs.summary === 1 &&
-                <ApplicantInfoSummary />
+                <ApplicantInfoSummary supreme={this} />
               }
               <hr />
               <div className="container" align="right">

@@ -115,7 +115,8 @@ class ApplicantInfo extends React.Component {
           </Box><br />
           <Box>
             Date of Birth:&nbsp;
-            <InputText
+            <input 
+              type="date"
               name="dateBirth"
               onChange={this.handleInputChange}
               value={applicantInfo.dateBirth}
@@ -166,7 +167,7 @@ class ApplicantInfo extends React.Component {
               value={applicantInfo.citizenship}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
-            Contact No.
+            Contact No.&nbsp;
             <InputText
               name="contactNumber"
               onChange={this.handleInputChange}
@@ -198,7 +199,8 @@ class ApplicantInfo extends React.Component {
           </Box><br />
           <Box>
             CTC Date Issued:&nbsp;
-            <InputText
+            <input 
+              type="date"
               name="ctcIssuedDate"
               onChange={this.handleInputChange}
               value={applicantInfo.ctcIssuedDate}

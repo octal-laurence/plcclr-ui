@@ -1,5 +1,79 @@
 ((window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\client\\certification-form.js"],{
 
+/***/ "./api_services/plcclr-api.js":
+/*!************************************!*\
+  !*** ./api_services/plcclr-api.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Plcclr =
+/*#__PURE__*/
+function () {
+  function Plcclr(opts) {
+    _classCallCheck(this, Plcclr);
+
+    this._baseURL = "http://localhost:8000";
+    this._apiKey = "Wwdg29Kvf2SE7Jb7aN3tXIkh9caXFCSZ7RQ7eqrnG7Gh6/DqxNayAc9jFFBEh7SuOZ2p0MH3DC8o1eWSvW9SmcpW1+Arq4Ims9Fon+AIL/i9Zp1eFkWrOiMche5D2t8Ur8+z5LYt5xME/ynPlXUDonww2tISFsEOoBVCSURaeCE=";
+  }
+
+  _createClass(Plcclr, [{
+    key: "request",
+    value: function request(path) {
+      var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+      return ["".concat(this._baseURL, "/").concat(path), {
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Wwdg29Kvf2SE7Jb7aN3tXIkh9caXFCSZ7RQ7eqrnG7Gh6/DqxNayAc9jFFBEh7SuOZ2p0MH3DC8o1eWSvW9SmcpW1+Arq4Ims9Fon+AIL/i9Zp1eFkWrOiMche5D2t8Ur8+z5LYt5xME/ynPlXUDonww2tISFsEOoBVCSURaeCE='
+        }
+      }];
+    }
+  }, {
+    key: "post",
+    value: function post(_ref) {
+      var _ref2 = _slicedToArray(_ref, 2),
+          url = _ref2[0],
+          opts = _ref2[1];
+
+      return fetch(url, _objectSpread({}, opts, {
+        method: 'POST'
+      }));
+    }
+  }, {
+    key: "newApplicantEntry",
+    value: function newApplicantEntry(applicant) {
+      return this.post(this.request('PoliceClearanceCertification/new', applicant));
+    }
+  }]);
+
+  return Plcclr;
+}();
+
+/* harmony default export */ __webpack_exports__["default"] = (Plcclr);
+
+/***/ }),
+
 /***/ "./node_modules/@babel/runtime-corejs2/core-js/array/from.js":
 /*!*******************************************************************!*\
   !*** ./node_modules/@babel/runtime-corejs2/core-js/array/from.js ***!
@@ -13781,7 +13855,8 @@ function (_React$Component) {
         name: "civilStatus",
         onChange: this.handleInputChange,
         value: applicantInfo.civilStatus
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Date of Birth:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Date of Birth:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "date",
         name: "dateBirth",
         onChange: this.handleInputChange,
         value: applicantInfo.dateBirth
@@ -13809,7 +13884,7 @@ function (_React$Component) {
         name: "citizenship",
         onChange: this.handleInputChange,
         value: applicantInfo.citizenship
-      }), "\xA0\xA0\xA0\xA0 Contact No.", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }), "\xA0\xA0\xA0\xA0 Contact No.\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
         name: "contactNumber",
         onChange: this.handleInputChange,
         value: applicantInfo.contactNumber
@@ -13825,7 +13900,8 @@ function (_React$Component) {
         name: "certResidencyIssuedAt",
         onChange: this.handleInputChange,
         value: applicantInfo.certResidencyIssuedAt
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "CTC Date Issued:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "CTC Date Issued:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "date",
         name: "ctcIssuedDate",
         onChange: this.handleInputChange,
         value: applicantInfo.ctcIssuedDate
@@ -14328,6 +14404,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fingerPrint__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./fingerPrint */ "./pages/client/certification-form/fingerPrint.js");
 /* harmony import */ var _signature__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./signature */ "./pages/client/certification-form/signature.js");
 /* harmony import */ var _summary__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./summary */ "./pages/client/certification-form/summary.js");
+/* harmony import */ var _api_services_plcclr_api__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../../../api_services/plcclr-api */ "./api_services/plcclr-api.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
@@ -14349,6 +14426,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
 
 
 
@@ -14461,6 +14539,8 @@ function (_React$Component) {
   }, {
     key: "submitApplicantEntry",
     value: function submitApplicantEntry() {
+      var plcclr = new _api_services_plcclr_api__WEBPACK_IMPORTED_MODULE_14__["default"]();
+
       var applicantData = _objectSpread({}, this.state.applicantInfo, {
         applicantIDPhoto: this.state.applicantIDPhoto.blob,
         applicantFingerPrint: this.state.applicantFingerPrint,
@@ -14468,29 +14548,18 @@ function (_React$Component) {
       });
 
       console.log(applicantData);
-      fetch('http://localhost:8000/PoliceClearanceCertification/testpush', {
-        body: JSON.stringify(applicantData),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Wwdg29Kvf2SE7Jb7aN3tXIkh9caXFCSZ7RQ7eqrnG7Gh6/DqxNayAc9jFFBEh7SuOZ2p0MH3DC8o1eWSvW9SmcpW1+Arq4Ims9Fon+AIL/i9Zp1eFkWrOiMche5D2t8Ur8+z5LYt5xME/ynPlXUDonww2tISFsEOoBVCSURaeCE='
-        },
-        method: 'POST'
-      }).then(function (response) {
+      plcclr.newApplicantEntry(_objectSpread({}, applicantData, {
+        machineId: 'DDDDD',
+        postalCode: 'DDDDD',
+        station: 'DDDDD',
+        stationName: 'DDDDD'
+      })).then(function (response) {
         return response.json();
       }).then(function (result) {
         console.log(result);
       }).catch(function (err) {
         console.log(err);
-      }); // fetch(url, {
-      //   body: JSON.stringify(params),
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     ...customHeaders,
-      //   },
-      //   method,
-      // })
-      // console.log(fetch);
-      // console.log(applicantData);
+      });
     }
   }, {
     key: "componentDidMount",
@@ -14545,7 +14614,9 @@ function (_React$Component) {
         supreme: this
       }), this.state.navTabs.applicantSignature === 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_signature__WEBPACK_IMPORTED_MODULE_12__["default"], {
         supreme: this
-      }), this.state.navTabs.summary === 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_summary__WEBPACK_IMPORTED_MODULE_13__["default"], null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      }), this.state.navTabs.summary === 1 && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_summary__WEBPACK_IMPORTED_MODULE_13__["default"], {
+        supreme: this
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "container",
         align: "right"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
@@ -14780,6 +14851,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ui/button */ "./pages/ui/button.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -14816,7 +14895,18 @@ function (_React$Component) {
   _createClass(Summary, [{
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Summary"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Information Summary")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null));
+      var supreme = this.props.supreme;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Summary"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Information Summary")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, Object.entries(supreme.state.applicantInfo).map(function (_ref) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            k = _ref2[0],
+            v = _ref2[1];
+
+        return [react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+          key: k
+        }, k, " :\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, v))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null)].map(function (elem) {
+          return elem;
+        });
+      })));
     }
   }]);
 
@@ -16392,7 +16482,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!********************************************************!*\
   !*** multi ./pages/client/certification-form/index.js ***!
   \********************************************************/
@@ -16417,5 +16507,5 @@ module.exports = dll_5d62d38be3592dca3a42;
 
 /***/ })
 
-},[[4,"static/runtime/webpack.js"]]]));;
+},[[3,"static/runtime/webpack.js"]]]));;
 //# sourceMappingURL=certification-form.js.map

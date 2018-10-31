@@ -24,7 +24,9 @@ app.prepare()
     console.log('im being triggered');
 
     if (route) {
-      return app.render(req, res, route.page, query);
+      return app.render(req, res, route.page, {
+        ...query
+      });
     }
 
     return handle(req, res);

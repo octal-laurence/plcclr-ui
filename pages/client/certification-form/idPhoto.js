@@ -35,7 +35,6 @@ class IDPhoto extends React.Component {
     });
   } 
   cameraSnapshot() {
-    const supreme = this.supreme;
     const updateStateApplicantIDPhoto = this.updateStateApplicantIDPhoto;
 
     if (Webcam) {

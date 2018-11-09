@@ -21,8 +21,6 @@ app.prepare()
     const {pathname, query = {}} = parseUrl;
     const route = routes[pathname];
 
-    console.log('im being triggered');
-
     if (route) {
       return app.render(req, res, route.page, {
         ...query

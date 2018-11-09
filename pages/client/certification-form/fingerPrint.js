@@ -24,8 +24,11 @@ class FingerPrint extends React.Component {
       window.REGIONFINGERPRINT.onStart();
     }
   }
+  componentWillUnmount() {
+    window.REGIONFINGERPRINT.onStop();
+  }
   renderFingerPrintProjector() {
-    const supreme = this.props.supreme;
+    const supreme = this.supreme;
 
     return (
       <Box flexDirection="row">
@@ -137,7 +140,7 @@ class FingerPrint extends React.Component {
     );
   }
   saveFingerPrint() {
-    const supreme = this.props.supreme;
+    const supreme = this.supreme;
     const localStorage = window.REGIONFINGERPRINT.localStorage;
 
     if (localStorage.getItem("imageSrc") == "" ||
@@ -145,6 +148,11 @@ class FingerPrint extends React.Component {
         document.getElementById('imagediv').innerHTML == "") {
           alert("Error -> Fingerprint not available");
     } else {
+      fetch(localStorage.getItem("imageSrc"))
+      .then(res => res.blob())
+      .then(blob => console.log(blob))
+      .catch(err => console.log(err));
+
       supreme.setState({
         applicantFingerPrint: {
           ...supreme.state.applicantFingerPrint,
@@ -184,11 +192,6 @@ class FingerPrint extends React.Component {
           </Button>
         </Box>
         <Head>
-          <script src="/static/sdk/fingerPrintScanner/lib/jquery.min.js" />
-          <script src="/static/sdk/fingerPrintScanner/lib/bootstrap.min.js" />
-          <script src="/static/sdk/fingerPrintScanner/scripts/es6-shim.js" />
-          <script src="/static/sdk/fingerPrintScanner/scripts/websdk.client.bundle.min.js" />
-          <script src="/static/sdk/fingerPrintScanner/scripts/fingerprint.sdk.min.js" />
           <script src="/static/sdk/fingerPrintScanner/customApp.js" />
         </Head>
       </div>

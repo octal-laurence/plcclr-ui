@@ -103,17 +103,14 @@ class Signature extends React.Component {
           <Button
             type="button"
             onClick={(e) => {
-              this.supreme.switchPageHandler('summary');
+              this.supreme.switchPageHandler('finalization');
             }}
           >
             Confirm and Go to Next Tab
           </Button>
         </Box>
         <Head>
-          <script src="/static/sdk/signature/signature_pad.umd.js" />
-          { this.state.librarySignatureController === 1 &&
-            <script src="/static/sdk/signature/sigapp.js" />
-          }
+          <script src="/static/sdk/signature/sigapp.js" />
         </Head>
       </div>
     );

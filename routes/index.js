@@ -6,6 +6,12 @@ module.exports = () => {
     '/certification-form': {
       page: '/client/certification-form'
     },
+    '/certification-entries': {
+      page: '/client/certification-entries'
+    },
+    '/certification-preview': {
+      page: '/client/certification-preview'
+    },
     '/404': {
       page: '/404'
     },

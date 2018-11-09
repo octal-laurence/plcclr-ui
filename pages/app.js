@@ -1,10 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Layout from './components/layout';
 import Container from './components/container';
 
 export default () => (
-  <div>
-    hello
-  </div>
+  <Layout>
+    <div>
+      hello
+    </div>
+  </Layout>
 );

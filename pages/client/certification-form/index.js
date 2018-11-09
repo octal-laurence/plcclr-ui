@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {withRouter} from 'next/router';
+import Head from 'next/head';
 
 import Wrapper from '../../wrapper';
 import Layout from '../../components/layout';
@@ -35,11 +36,16 @@ class CertificationForm extends React.Component {
       tab: 'applicantSignature',
       label: 'Signature',
     }, {
-      tab: 'summary',
-      label: 'Summary',
+      tab: 'finalization',
+      label: 'Finalization',
     }];
 
     this.state = {
+      editing: {
+        status: '',
+        error: '',
+        loading: false,
+      },
       applicantInfo: {
         firstName: '',
         lastName: '',
@@ -100,6 +106,29 @@ class CertificationForm extends React.Component {
       return json;
     }, {});
 
+    const inputValidation = ((tabName) => {
+      const [currentTab] = Object.entries(this.state.navTabs).find(([k, v]) => v === 1);
+      const invalid = Object.entries(this.state[currentTab] || {})
+                      .filter(([k, v]) => v === '' || !v)
+      return invalid;
+    })(tab);
+
+    // if (inputValidation.length === 0) {
+    //   this.setState({
+    //     navTabs: {
+    //       ...navTabsStat,
+    //       [tab]: 1
+    //     }
+    //   });
+    // } else {
+    //   const invalidInputList = inputValidation.reduce((notifyInvalid, [item]) => {
+    //     notifyInvalid += `${item}\n`;
+    //     return notifyInvalid
+    //   }, '');
+    //   alert(`Check the following record, must be required & valid entry\n${invalidInputList}`);
+    // }
+
+    // remove soon
     this.setState({
       navTabs: {
         ...navTabsStat,
@@ -107,34 +136,43 @@ class CertificationForm extends React.Component {
       }
     });
   }
+  // submitApplicantEntry() {
+  //   // window.location.href = `/certification-preview?id=${certification.rid}`;
+  //   window.location.href = `/certification-preview?id=12:34`;
+  // }
   submitApplicantEntry() {
+    this.setState({ editing: { ...this.state.editing, loading: true } })
     const plcclr = new PlcclrAPI();
     const applicantData = {
       ...this.state.applicantInfo,
       applicantIDPhoto: this.state.applicantIDPhoto.blob,
-      applicantFingerPrint: this.state.applicantFingerPrint,
+      applicantFingerPrint: ((input) => {
+        const fingerPrints = Object.entries(input)
+                             .map(([k, v]) => ({
+                              [k]: v.split(',')[1],
+                             }))
+                             .reduce((obj, item) => {
+                              const [[k, v = '']] = Object.entries(item);
+                              obj[k] = v
+                              return obj;
+                             }, {});
+        return fingerPrints
+      })(this.state.applicantFingerPrint),
       applicantSignature: this.state.applicantSignature.blob
     }
 
-    console.log(applicantData);
-
-    plcclr.newApplicantEntry({
-      ...applicantData,
-      machineId: 'DDDDD',
-      postalCode: 'DDDDD',
-      station: 'DDDDD',
-      stationName: 'DDDDD'
-    })
-    .then(response => response.json())
-    .then(result => {
-      console.log(result);
+    plcclr.newApplicantEntry(applicantData)
+    .then(([{certification}]) => {
+      alert('Save Success');
+      const [, rid] = certification['@rid'].split('#');
+      window.location.href = `/certification-preview?id=${rid}`;
     })
     .catch(err => {
-      console.log(err);
+      this.setState({ editing: { ...this.state.editing, loading: false, error: err.message } });
     });
   }
   componentDidMount() {
-    this.switchPageHandler('applicantInfo');
+    this.setState({ navTabs: { ...this.state.navTabs, applicantInfo: 1 } });
   }
   renderNavTabs() {
     return (
@@ -168,9 +206,7 @@ class CertificationForm extends React.Component {
             >
               { this.state.navTabs.applicantInfo === 1 && 
                 <ApplicantInfo
-                  applicantInfoInputHandler={this.applicantInfoInputHandler}
-                  switchPageHandler={() => this.switchPageHandler(this.navTabs[1].tab)} 
-                  applicantInfo={this.state.applicantInfo}
+                  supreme={this}
                 /> 
               }
               { this.state.navTabs.applicantIDPhoto === 1 &&
@@ -182,18 +218,33 @@ class CertificationForm extends React.Component {
               { this.state.navTabs.applicantSignature === 1 &&
                 <ApplicantSignature supreme={this} />
               }
-              { this.state.navTabs.summary === 1 &&
-                <ApplicantInfoSummary supreme={this} />
+              { this.state.navTabs.finalization === 1 &&
+                <div>
+                  <ApplicantInfoSummary supreme={this} />
+                  <hr />
+                  <div className="container" align="right">
+                    { this.state.editing.loading ?
+                      <label>Please Wait, Record is on Processing...</label>
+                      :
+                      <button type="submit">
+                        Save
+                      </button>
+                    }
+                  </div>
+                </div>
               }
-              <hr />
-              <div className="container" align="right">
-                <button type="submit">
-                  Save
-                </button>
-              </div>
             </form>
           </div>
         </Box>
+        <Head>
+          {/*FINGERPRINT*/}
+          <script src="/static/sdk/fingerPrintScanner/scripts/es6-shim.js" />
+          <script src="/static/sdk/fingerPrintScanner/scripts/websdk.client.bundle.min.js" />
+          <script src="/static/sdk/fingerPrintScanner/scripts/fingerprint.sdk.min.js" />
+
+          {/*SIGNATURE*/}
+          <script src="/static/sdk/signature/signature_pad.umd.js" />
+        </Head>
       </Layout>
     );
   }

@@ -15,11 +15,11 @@ class ApplicantInfo extends React.Component {
     const {name} = e.target;
     const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
 
-    this.props.applicantInfoInputHandler(name, value);
+    this.props.supreme.applicantInfoInputHandler(name, value);
   }
   render() {
     const supreme = this.props.supreme;
-    const applicantInfo = this.props.applicantInfo;
+    const applicantInfo = supreme.state.applicantInfo;
     return (
       <div padding="100px">
         <h3>
@@ -185,9 +185,9 @@ class ApplicantInfo extends React.Component {
           <Box>
             Residence Cert:&nbsp;
             <InputText
-              name="residence"
+              name="certResidency"
               onChange={this.handleInputChange}
-              value={applicantInfo.residence}
+              value={applicantInfo.certResidency}
             />
             &nbsp;&nbsp;&nbsp;&nbsp;
             Issued At:&nbsp;
@@ -211,7 +211,7 @@ class ApplicantInfo extends React.Component {
               type="button"
               onClick={(e) => {
                 e.preventDefault();
-                this.supreme.switchPageHandler('applicantIDPhoto');
+                supreme.switchPageHandler('applicantIDPhoto');
               }}
             >
               Confirm and Go to Next Tab

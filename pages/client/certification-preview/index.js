@@ -4,12 +4,11 @@ import {withRouter} from 'next/router';
 import Head from 'next/head';
 
 import Wrapper from '../../wrapper';
-import Layout from '../../components/layout';
+import Layout from '../../layout';
 import NavTabs from '../../components/navTabs';
-
 import Box from '../../ui/box';
 
-import PlcclrAPI from '../../../api_services/plcclr-api';
+import post from '../../../middleware/router';
 
 class CertificationPreview extends React.Component {
   constructor(props) {
@@ -39,6 +38,30 @@ class CertificationPreview extends React.Component {
       tab: 'applicantSignature',
       label: 'Signature',
     }]
+    this.certificationInfo = {
+      machineId: { label: 'machine#' },
+      station: { label: 'station' },
+      stationName : { label: 'station name ' },
+      dateCreated : { label: 'date file' },
+      dateUpdated: { label: 'date update' },
+      purpose: { label: 'purpose' },
+      remarks: { label: 'remarks' },
+      status: { label: 'status' },
+    };
+    this.applicantInfo = {
+      firstName: { label: 'first name' },
+      lastName: { label: 'last name' },
+      middleName: { label: 'middle name' },
+      suffix: { label: 'suffix' },
+      address: { label: 'address' },
+      gender: { label: 'gender' },
+      civilStatus: { label: 'civil status' },
+      citizenship: { label: 'citizenship' },
+      dateBirth: { label: 'birth date' },
+      birthPlace: { label: 'birth place' },
+      height: { label: 'height' },
+      weight: { label: 'weight' },
+    };
 
     this.getApplicantEntry = ((id) => {
       const setApplicantData = ((state = {}) => {
@@ -52,15 +75,19 @@ class CertificationPreview extends React.Component {
 
       setApplicantData({ loading: true });
 
-      const plcclr = new PlcclrAPI();
-      plcclr.getApplicantEntry(`#${id}`)
+      post(`/police-clearance-certification/getRecord`, {id: `#${id}`})
       .then(data => {
-        const { applicant, ...certification } = data;
+        const { applicant, address, ...certification } = data;
         setApplicantData({
           loading: false,
           data: {
             certification,
-            applicant,
+            applicant: {
+              ...applicant,
+              address: (({address1,address2,barangay,city,province}) => {
+                          return `${address1} ${address2} ${barangay}, ${city} ${province}`
+                        })(address)
+            }
           }
         });
       })
@@ -78,6 +105,8 @@ class CertificationPreview extends React.Component {
   }
   render() {
     const {applicant} = this.state;
+
+
     return (
       <Layout>
         <Box>
@@ -96,11 +125,11 @@ class CertificationPreview extends React.Component {
                 <Box>Loading...</Box>
                 :
                 <Box>
-                  { Object.entries(applicant.data.certification)
+                  { Object.entries(this.certificationInfo)
                     .map(([k, v]) => [(
                       <Box key={k}>
-                        {k} :&nbsp;
-                        <label><u>{v}</u></label>
+                        { v.label } :&nbsp;
+                        <label><u>{ applicant.data.certification[k] || null }</u></label>
                       </Box>
                     ), (<br />)].map((elem) => elem)) 
                   }
@@ -114,16 +143,27 @@ class CertificationPreview extends React.Component {
                 <Box>Loading...</Box>
                 :
                 <Box>
-                  { Object.entries(applicant.data.applicant)
+                  { Object.entries(this.applicantInfo)
                     .map(([k, v]) => [(
                       <Box key={k}>
-                        {k} :&nbsp;
-                        <label><u>{v}</u></label>
+                        { v.label } :&nbsp;
+                        <label><u>{ applicant.data.applicant[k] || null }</u></label>
                       </Box>
                     ), (<br />)].map((elem) => elem)) 
                   }
                 </Box>
               }
+            </Box>
+            <Box>
+              <h4 align="center">Identification</h4>
+              <hr />
+              <Box
+                height="300px"
+                borderStyle="groove"
+                flexDirection="row"
+              >
+                images here... 
+              </Box>
             </Box>
           </Box>
         </Box>

@@ -75,21 +75,23 @@ class Signature extends React.Component {
                       })
                     }}>
                       Clear
-                    </button>
-                  &nbsp;
-                  <button type="button" className="button" data-action="change-color">Change color</button>
+                  </button>
                   &nbsp;
                   <button
                     type="button"
                     className="button"
                     onClick={(e) => {
                       var dataURL = window.signaturePad.toDataURL("image/jpeg");
-                      supreme.setState({
-                        applicantSignature: {
-                        ...supreme.state.applicantSignature,
-                        blob: dataURL,
-                        },
-                      }, () => this.setState({ librarySignatureCapture: 1 }));
+                      if (dataURL !== 'data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgICAgMCAgIDAwMDBAYEBAQEBAgGBgUGCQgKCgkICQkKDA8MCgsOCwkJDRENDg8QEBEQCgwSExIQEw8QEBD/2wBDAQMDAwQDBAgEBAgQCwkLEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBD/wAARCACWASwDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAn/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/AKpgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA//9k=') {
+                        supreme.setState({
+                          applicantSignature: {
+                          ...supreme.state.applicantSignature,
+                          blob: dataURL,
+                          },
+                        }, () => this.setState({ librarySignatureCapture: 1 }));
+                      } else {
+                        alert('Signature is empty');
+                      }
                     }}>
                       Capture
                   </button>

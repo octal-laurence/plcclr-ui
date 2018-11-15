@@ -9,8 +9,7 @@ const Box = styled(({
   height,
   width,
   ...otherProps
-}) => <div {...otherProps} />).attrs({})`
-
+}) => <div {...otherProps} />)`
   display: ${p => (p.flexDirection) ? `flex` : `block`};
   flex-direction: ${p => p.flexDirection || `column`};
 

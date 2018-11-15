@@ -4,7 +4,7 @@ import {withRouter} from 'next/router';
 import Head from 'next/head';
 
 import Wrapper from '../../wrapper';
-import Layout from '../../components/layout';
+import Layout from '../../layout';
 import NavTabs from '../../components/navTabs';
 
 import Box from '../../ui/box';
@@ -18,7 +18,7 @@ import {
 } from '../../ui/table';
 import Button from '../../ui/button';
 
-import PlcclrAPI from '../../../api_services/plcclr-api';
+import post from '../../../middleware/router';
 
 class CertificationEntries extends React.Component {
   constructor(props) {
@@ -41,8 +41,7 @@ class CertificationEntries extends React.Component {
         }
       });
 
-      const plcclr = new PlcclrAPI();
-      plcclr.list({
+      post(`/police-clearance-certification/list`, {
         pgSkip: this.state.certificationEntries.page,
       })
       .then(list => {

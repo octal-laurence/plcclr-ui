@@ -4,8 +4,9 @@ import {withRouter} from 'next/router';
 import Head from 'next/head';
 
 import Wrapper from '../../wrapper';
-import Layout from '../../components/layout';
+import Layout from '../../layout';
 import NavTabs from '../../components/navTabs';
+import Sidebar from '../../components/sidebar';
 
 import Box from '../../ui/box';
 import InputText from '../../ui/inputText';
@@ -17,7 +18,7 @@ import ApplicantFingerPrint from './fingerPrint';
 import ApplicantSignature from './signature';
 import ApplicantInfoSummary from './summary';
 
-import PlcclrAPI from '../../../api_services/plcclr-api';
+import post from '../../../middleware/router';
 
 class CertificationForm extends React.Component {
   constructor(props) {
@@ -110,39 +111,28 @@ class CertificationForm extends React.Component {
       const [currentTab] = Object.entries(this.state.navTabs).find(([k, v]) => v === 1);
       const invalid = Object.entries(this.state[currentTab] || {})
                       .filter(([k, v]) => v === '' || !v)
-      return invalid;
+      // back to original
+      // return invalid;
+      return [];
     })(tab);
 
-    // if (inputValidation.length === 0) {
-    //   this.setState({
-    //     navTabs: {
-    //       ...navTabsStat,
-    //       [tab]: 1
-    //     }
-    //   });
-    // } else {
-    //   const invalidInputList = inputValidation.reduce((notifyInvalid, [item]) => {
-    //     notifyInvalid += `${item}\n`;
-    //     return notifyInvalid
-    //   }, '');
-    //   alert(`Check the following record, must be required & valid entry\n${invalidInputList}`);
-    // }
-
-    // remove soon
-    this.setState({
-      navTabs: {
-        ...navTabsStat,
-        [tab]: 1
-      }
-    });
+    if (inputValidation.length === 0) {
+      this.setState({
+        navTabs: {
+          ...navTabsStat,
+          [tab]: 1
+        }
+      });
+    } else {
+      const invalidInputList = inputValidation.reduce((notifyInvalid, [item]) => {
+        notifyInvalid += `${item}\n`;
+        return notifyInvalid
+      }, '');
+      alert(`Check the following record, must be required & valid entry\n${invalidInputList}`);
+    }
   }
-  // submitApplicantEntry() {
-  //   // window.location.href = `/certification-preview?id=${certification.rid}`;
-  //   window.location.href = `/certification-preview?id=12:34`;
-  // }
   submitApplicantEntry() {
     this.setState({ editing: { ...this.state.editing, loading: true } })
-    const plcclr = new PlcclrAPI();
     const applicantData = {
       ...this.state.applicantInfo,
       applicantIDPhoto: this.state.applicantIDPhoto.blob,
@@ -161,13 +151,14 @@ class CertificationForm extends React.Component {
       applicantSignature: this.state.applicantSignature.blob
     }
 
-    plcclr.newApplicantEntry(applicantData)
+    post(`/police-clearance-certification/new`, applicantData)
     .then(([{certification}]) => {
       alert('Save Success');
       const [, rid] = certification['@rid'].split('#');
       window.location.href = `/certification-preview?id=${rid}`;
     })
     .catch(err => {
+      alert(err.message);
       this.setState({ editing: { ...this.state.editing, loading: false, error: err.message } });
     });
   }
@@ -195,7 +186,7 @@ class CertificationForm extends React.Component {
   render() {
     return (
       <Layout>
-        <Box className="container">
+        <Box>
           { this.renderNavTabs() }
           <div id="formContents" className="container">
             <form
@@ -237,6 +228,8 @@ class CertificationForm extends React.Component {
           </div>
         </Box>
         <Head>
+          <title>Police Clearance</title>
+
           {/*FINGERPRINT*/}
           <script src="/static/sdk/fingerPrintScanner/scripts/es6-shim.js" />
           <script src="/static/sdk/fingerPrintScanner/scripts/websdk.client.bundle.min.js" />

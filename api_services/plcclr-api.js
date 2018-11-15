@@ -1,12 +1,17 @@
+const config = require('config');
+const rp = require('request-promise');
+
 class Plcclr {
   constructor(opts) {
+    // this._baseURL = config.get('plcclr.baseURL');
     this._baseURL = "http://localhost:8000/PoliceClearanceCertification";
-    this._apiKey = "Wwdg29Kvf2SE7Jb7aN3tXIkh9caXFCSZ7RQ7eqrnG7Gh6/DqxNayAc9jFFBEh7SuOZ2p0MH3DC8o1eWSvW9SmcpW1+Arq4Ims9Fon+AIL/i9Zp1eFkWrOiMche5D2t8Ur8+z5LYt5xME/ynPlXUDonww2tISFsEOoBVCSURaeCE=";
+    this._apiKey = config.get('plcclr.apiKey');
   }
   request(path, data = {}) {
     return [
       `${this._baseURL}/${path}`, {
-        body: JSON.stringify(data),
+        json: true,
+        body: data,
         headers: {
           'Content-Type': 'application/json',
           'Authorization': this._apiKey
@@ -15,14 +20,10 @@ class Plcclr {
     ];
   }
   post([url, opts]) {
-    return new Promise((resolve, reject) => {
-      fetch(url, {
-        ...opts,
-        method: 'POST'
-      })
-      .then(response => response.json())
-      .then(({data}) => resolve(data))
-      .catch(err => reject(err));
+    return rp({
+      method: 'POST',
+      uri: url,
+      ...opts,
     });
   }
   newApplicantEntry(applicant) {
@@ -51,4 +52,4 @@ class Plcclr {
   }
 }
 
-export default Plcclr;
+module.exports = Plcclr;

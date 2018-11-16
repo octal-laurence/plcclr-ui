@@ -78,6 +78,7 @@ class CertificationPreview extends React.Component {
       post(`/police-clearance-certification/getRecord`, {id: `#${id}`})
       .then(data => {
         const { applicant, address, ...certification } = data;
+
         setApplicantData({
           loading: false,
           data: {
@@ -105,7 +106,7 @@ class CertificationPreview extends React.Component {
   }
   render() {
     const {applicant} = this.state;
-
+    console.log(applicant)
 
     return (
       <Layout>
@@ -158,11 +159,97 @@ class CertificationPreview extends React.Component {
               <h4 align="center">Identification</h4>
               <hr />
               <Box
-                height="300px"
+                height="400px"
                 borderStyle="groove"
                 flexDirection="row"
               >
-                images here... 
+                <Box
+                  width="50%"
+                  height="100%"
+                  position="relative"
+                >
+                  <Box 
+                    justifyMe
+                    width="400px"
+                  >
+                    <img
+                      src={applicant.data.applicant.applicantIDPhoto && applicant.data.applicant.applicantIDPhoto}
+                      style={{
+                        display: 'block',
+                        width: '100%',
+                        height: 'auto',
+                      }}
+                    />
+                  </Box>
+                </Box>
+                <Box
+                  width="50%"
+                  height="100%"
+                  position="relative"
+                >
+                  <Box 
+                    justifyMe
+                    width="300px"
+                  >
+                    <Box
+                      width="100%"
+                      height="150px"
+                      align="center"
+                    >
+                      <Box flexDirection="row">
+                        <Box 
+                          className="leftThumb"
+                          borderStyle="groove"
+                          height="150px"
+                          width="50%"
+                        >
+                          <img
+                            src={applicant.data.applicant.applicantFingerPrints && `data:image/png;base64,${applicant.data.applicant.applicantFingerPrints.leftThumb}`}
+                            style={{
+                              display: 'block',
+                              width: 'auto',
+                              height: '100%',
+                            }}
+                          />
+                        </Box>
+                        <Box 
+                          className="leftThumb"
+                          borderStyle="groove"
+                          height="150px"
+                          width="50%"
+                        >
+                          <img
+                            src={applicant.data.applicant.applicantFingerPrints && `data:image/png;base64,${applicant.data.applicant.applicantFingerPrints.rightThumb}`}
+                            style={{
+                              display: 'block',
+                              width: 'auto',
+                              height: '100%',
+                            }}
+                          />
+                        </Box>
+                      </Box>
+                    </Box>
+                    <Box
+                      width="100%"
+                      height="150px"
+                      align="center"
+                    >
+                      <Box
+                        borderStyle="groove"
+                        width="200px"
+                      >
+                        <img
+                          src={applicant.data.applicant.applicantSignature && applicant.data.applicant.applicantSignature}
+                          style={{
+                            display: 'block',
+                            width: '100%',
+                            height: 'auto',
+                          }}
+                        />
+                      </Box>
+                    </Box>
+                  </Box>
+                </Box> 
               </Box>
             </Box>
           </Box>

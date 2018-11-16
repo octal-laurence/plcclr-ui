@@ -6,14 +6,21 @@ export default (path, data = {}) => {
       headers: { 'Content-Type': 'application/json', },
     })
     .then(response => {
+      console.log(response);
       if (response.status === 200) {
         return response;
       } else {
-        reject("Server Error");
+        const errorServer = new Error("Server Error");
+        reject(errorServer);
       }
     })
     .then(response => response.json())
-    .then(({data}) => resolve(data))
-    .catch(err => reject(err));
+    .then(({data}) => {
+      resolve(data);
+    })
+    .catch(err => {
+      console.log(err);``
+      reject(err)
+    });
   });
 };

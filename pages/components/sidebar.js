@@ -25,9 +25,15 @@ class Sidebar extends React.Component {
       <Container
         backgroundColor={theme.colors.primary}
         color={theme.colors.white}
-        style={{ bottom: 0, position: 'fixed', top: 0, zIndex: 100 }}
-        width={250}
+        style={{
+          top: 0,
+          bottom: 0,
+          left: 0,
+          position: 'fixed',
+          zIndex: 100 }}
+        width={300}
       >
+        <Header centered>PLCCLR</Header>
       </Container>
     )
   }

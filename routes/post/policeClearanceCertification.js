@@ -16,7 +16,11 @@ router.post('/getRecord', (req, res, next) => {
   const plcclr = new apiPlcclr();
   plcclr.getApplicantEntry(body.id)
   .then(({data}) => res.status(200).json({ data: data }))
-  .catch(err => res.status(500).json({ error: err.message }));
+  // .catch(err => res.status(500).json({ error: err.message }));
+  .catch(err => {
+    console.log(err);
+    res.status(500).json({ error: err.message });
+  });
 });
 
 router.post('/list', (req, res, next) => {

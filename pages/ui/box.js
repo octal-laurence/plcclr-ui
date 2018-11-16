@@ -3,6 +3,8 @@ import styled from 'styled-components';
 
 const Box = styled(({
   flexDirection,
+  justifyMe,
+  position,
 
   borderStyle,
   backgroundColor,
@@ -18,6 +20,13 @@ const Box = styled(({
   ${p => (p.width) && `min-width: ${p.width}; max-width: ${p.width};`}
   ${p => (p.backgroundColor) && `background-color: ${p.backgroundColor};`}
 
+  ${p => (p.position) && `position: ${p.position}`}
+  ${p => (p.justifyMe) && `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  `}
 `;
 
 export default Box;

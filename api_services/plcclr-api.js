@@ -3,8 +3,8 @@ const rp = require('request-promise');
 
 class Plcclr {
   constructor(opts) {
-    // this._baseURL = config.get('plcclr.baseURL');
-    this._baseURL = "http://localhost:8000/PoliceClearanceCertification";
+    // this._baseURL = "http://localhost:8000/PoliceClearanceCertification";
+    this._baseURL = config.get('plcclr.baseURL');
     this._apiKey = config.get('plcclr.apiKey');
   }
   request(path, data = {}) {

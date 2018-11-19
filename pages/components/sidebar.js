@@ -2,6 +2,7 @@ import React from 'react';
 
 // UI
 import Container from './container';
+import NavLinks from './navLinks';
 import Header from '../ui/header';
 import theme from '../ui/styles/theme';
 
@@ -34,6 +35,13 @@ class Sidebar extends React.Component {
         width={300}
       >
         <Header centered>PLCCLR</Header>
+        <Container>
+          <NavLinks items={[[
+            `certification-form`, `/certification-form`
+          ], [
+            `certification-entries`, `/certification-entries`
+          ]]}/>
+        </Container>
       </Container>
     )
   }

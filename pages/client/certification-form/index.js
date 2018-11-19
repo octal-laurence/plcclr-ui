@@ -111,9 +111,8 @@ class CertificationForm extends React.Component {
       const [currentTab] = Object.entries(this.state.navTabs).find(([k, v]) => v === 1);
       const invalid = Object.entries(this.state[currentTab] || {})
                       .filter(([k, v]) => v === '' || !v)
-      // back to original
-      // return invalid;
-      return [];
+                      
+      return invalid;
     })(tab);
 
     if (inputValidation.length === 0) {

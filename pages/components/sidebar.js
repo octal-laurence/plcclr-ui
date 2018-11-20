@@ -36,11 +36,7 @@ class Sidebar extends React.Component {
       >
         <Header centered>PLCCLR</Header>
         <Container>
-          <NavLinks items={[[
-            `certification-form`, `/certification-form`
-          ], [
-            `certification-entries`, `/certification-entries`
-          ]]}/>
+          <NavLinks checkNavLink />
         </Container>
       </Container>
     )

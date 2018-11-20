@@ -23,7 +23,7 @@ import post from '../../../middleware/router';
 class CertificationForm extends React.Component {
   constructor(props) {
     super(props);
-    
+
     this.navTabs = [{
       tab: 'applicantInfo',
       label: 'Start',
@@ -184,7 +184,9 @@ class CertificationForm extends React.Component {
   }
   render() {
     return (
-      <Layout>
+      <Layout
+        inSidebarNavLink={this.props.router.asPath}
+      >
         <Box>
           { this.renderNavTabs() }
           <div id="formContents" className="container">
@@ -195,9 +197,7 @@ class CertificationForm extends React.Component {
               }}
             >
               { this.state.navTabs.applicantInfo === 1 && 
-                <ApplicantInfo
-                  supreme={this}
-                /> 
+                <ApplicantInfo supreme={this} /> 
               }
               { this.state.navTabs.applicantIDPhoto === 1 &&
                 <ApplicantIDPhoto supreme={this} />

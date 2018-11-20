@@ -68,7 +68,9 @@ class CertificationEntries extends React.Component {
     const certificationEntries = this.state.certificationEntries;
 
     return (
-      <Layout>
+      <Layout
+        inSidebarNavLink={this.props.router.asPath}
+      >
         <Box>
           <Box>
             List

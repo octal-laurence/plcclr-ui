@@ -15,7 +15,7 @@ class Plcclr {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': this._apiKey
-        }  
+        }
       }
     ];
   }

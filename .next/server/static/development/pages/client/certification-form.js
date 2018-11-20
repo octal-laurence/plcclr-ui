@@ -1066,7 +1066,9 @@ function (_React$Component) {
     value: function render() {
       var _this5 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_8__["default"], null, this.renderNavTabs(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        inSidebarNavLink: this.props.router.asPath
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_8__["default"], null, this.renderNavTabs(), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "formContents",
         className: "container"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("form", {
@@ -1558,9 +1560,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _container__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./container */ "./pages/components/container.js");
-/* harmony import */ var _ui_header__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ui/header */ "./pages/ui/header.js");
-/* harmony import */ var _ui_styles_theme__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ui/styles/theme */ "./pages/ui/styles/theme.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _ui_styles_theme__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../ui/styles/theme */ "./pages/ui/styles/theme.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../routes */ "./routes/index.js");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_routes__WEBPACK_IMPORTED_MODULE_4__);
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -1570,33 +1574,43 @@ function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = 
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
- // UI
 
+ // UI
 
 
 
 var NavList = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.ul.withConfig({
   displayName: "navLinks__NavList",
   componentId: "sc-10u8831-0"
-})(["list-style-type:none;margin:0;padding:0;width:100%;background-color:#f1f1f1;"]);
+})(["list-style-type:none;margin:0;padding:0;width:100%;background-color:", ";"], _ui_styles_theme__WEBPACK_IMPORTED_MODULE_3__["default"].colors.primary);
 var Alink = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.a.withConfig({
   displayName: "navLinks__Alink",
   componentId: "sc-10u8831-1"
-})(["display:block;color:#000;padding:8px 16px;text-decoration:none;&:hover{background-color:#555;color:white;}"]);
-/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
-  var items = _ref.items;
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(NavList, null, items.map(function (_ref2) {
-    var _ref3 = _slicedToArray(_ref2, 2),
-        _ref3$ = _ref3[0],
-        label = _ref3$ === void 0 ? 'label' : _ref3$,
-        _ref3$2 = _ref3[1],
-        route = _ref3$2 === void 0 ? '/' : _ref3$2;
-
-    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Alink, {
-      href: route
-    }, label));
-  }));
+})(["display:block;color:white;padding:8px 16px;text-decoration:none;", " &:hover{color:#000;border-style:groove;}"], function (p) {
+  return p.active && "\n    color: #000;\n    background-color: #f1f1f1;\n  ";
 });
+/* harmony default export */ __webpack_exports__["default"] = (Object(next_router__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(function (_ref) {
+  var _ref$router = _ref.router,
+      router = _ref$router === void 0 ? {} : _ref$router;
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(NavList, null, Object.entries(_routes__WEBPACK_IMPORTED_MODULE_4___default()()).filter(function (_ref2) {
+    var _ref3 = _slicedToArray(_ref2, 2),
+        route = _ref3[0],
+        data = _ref3[1];
+
+    return data.hasOwnProperty("navLinks");
+  }).map(function (_ref4, i) {
+    var _ref5 = _slicedToArray(_ref4, 2),
+        route = _ref5[0],
+        data = _ref5[1];
+
+    return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+      key: i
+    }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(Alink, {
+      href: route,
+      active: router.asPath === route
+    }, data.navLinks));
+  }));
+}));
 
 /***/ }),
 
@@ -1760,7 +1774,7 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_header__WEBPACK_IMPORTED_MODULE_3__["default"], {
         centered: true
       }, "PLCCLR"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_container__WEBPACK_IMPORTED_MODULE_1__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_navLinks__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        items: [["certification-form", "/certification-form"], ["certification-entries", "/certification-entries"]]
+        checkNavLink: true
       })));
     }
   }]);
@@ -1793,26 +1807,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- // const Layout = (props) => (
-//   <div className="container-fluid">
-//     <div className="container">
-//       <div>
-//         <label>Account Name:</label>&nbsp;<span>Admin Account</span>
-//       </div>
-//     </div><hr/>
-//     <div
-//       className="container"
-//       style={{
-//         'marginTop': '50px',
-//         'marginBottom': '100px'
-//       }}
-//     >
-//       { props.children }
-//     </div>
-//   </div>
-// );
 
-var Layout = function Layout(props) {
+
+var Layout = function Layout(_ref) {
+  var children = _ref.children,
+      inSidebarNavLink = _ref.inSidebarNavLink;
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: "container-fluid",
     flexDirection: "row"
@@ -1830,7 +1829,7 @@ var Layout = function Layout(props) {
       'marginTop': '50px',
       'marginBottom': '100px'
     }
-  }, props.children)));
+  }, children)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Layout);
@@ -3188,6 +3187,40 @@ __webpack_require__.r(__webpack_exports__);
     theme: _ui_styles_theme__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(App, null));
 });
+
+/***/ }),
+
+/***/ "./routes/index.js":
+/*!*************************!*\
+  !*** ./routes/index.js ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = function () {
+  return {
+    '/': {
+      page: '/'
+    },
+    '/certification-form': {
+      page: '/client/certification-form',
+      navLinks: 'certification-form'
+    },
+    '/certification-entries': {
+      page: '/client/certification-entries',
+      navLinks: 'certification-entries'
+    },
+    '/certification-preview': {
+      page: '/client/certification-preview'
+    },
+    '/404': {
+      page: '/404'
+    },
+    '/about': {
+      page: '/about'
+    }
+  };
+};
 
 /***/ }),
 

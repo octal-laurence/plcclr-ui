@@ -5,26 +5,7 @@ import Head from 'next/head';
 import Sidebar from '../components/sidebar';
 import Box from '../ui/box'; 
 
-// const Layout = (props) => (
-//   <div className="container-fluid">
-//     <div className="container">
-//       <div>
-//         <label>Account Name:</label>&nbsp;<span>Admin Account</span>
-//       </div>
-//     </div><hr/>
-//     <div
-//       className="container"
-//       style={{
-//         'marginTop': '50px',
-//         'marginBottom': '100px'
-//       }}
-//     >
-//       { props.children }
-//     </div>
-//   </div>
-// );
-
-const Layout = (props) => (
+const Layout = ({children, inSidebarNavLink}) => (
   <Box 
     className="container-fluid"
     flexDirection="row"
@@ -46,7 +27,7 @@ const Layout = (props) => (
           'marginBottom': '100px'
         }}
       >
-        { props.children }
+        { children }
       </Box>
     </Box>
   </Box>

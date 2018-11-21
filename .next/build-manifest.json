@@ -11,11 +11,11 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/client/certification-entries": [
+    "/client/certification-form": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/client/certification-form": [
+    "/client/certification-entries": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

@@ -72,40 +72,49 @@ class IDPhoto extends React.Component {
             Require Identification Image to be taken.
           </p>
         </Box><hr />
-        <Box flexDirection="row">
-          <div className="row">
-            <div className="col-sm-4">
+        <Box align="center">
+          <Box
+            addSideMarginForChildren="sm"
+            flexDirection="row"
+            width="100%"
+            withVerticalPadding="sm"
+          >
+            <Box width="50%" align="center">
               <div id="my_camera"></div>
-            </div>
-
-            <div className="col-sm-1"></div>
-
-            <div className="col-sm-4">
+            </Box>
+            <Box width="50%" align="center">
               <div id="results">
                 <img src={supreme.state.applicantIDPhoto.blob} />
               </div>
               <input type="hidden" id="captured_text" />
-            </div>
-          </div>
-              
-          <div className="row">
-            <div className="col-sm-4">
-              <input
+            </Box>
+          </Box>
+          <Box
+            addSideMarginForChildren="sm"
+            flexDirection="row"
+            width="200px"
+            withVerticalPadding="sm"
+          >
+            <Box width="50%" align="center">
+              <button
                 type="button"
-                value="Take Snapshot"
                 onClick={this.cameraSnapshot}
-              />
-              <br />
-              <input
+              >
+                capture
+              </button>
+            </Box>
+            <Box width="50%" align="center">
+              <button
                 type="button"
-                value="Reset"
                 onClick={(e) => this.updateStateApplicantIDPhoto({
                   blob: ''
                 })}
-              />
-            </div>
-          </div>
-        </Box><br />
+              >
+                reset
+              </button>
+            </Box>
+          </Box>
+        </Box>
         <Box>
           <Button
             type="button"

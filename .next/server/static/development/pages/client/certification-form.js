@@ -199,7 +199,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _ui_box__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../ui/box */ "./pages/ui/box.js");
 /* harmony import */ var _ui_inputText__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ui/inputText */ "./pages/ui/inputText.js");
-/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ui/button */ "./pages/ui/button.js");
+/* harmony import */ var _ui_input__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../ui/input */ "./pages/ui/input.js");
+/* harmony import */ var _ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ui/inputLabel */ "./pages/ui/inputLabel.js");
+/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../ui/button */ "./pages/ui/button.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -217,6 +219,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
 
 
 
@@ -253,101 +257,209 @@ function (_React$Component) {
       var applicantInfo = supreme.state.applicantInfo;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         padding: "100px"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Applicant Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Input Applicant Personal Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "First Name:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Applicant Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Input Applicant Personal Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "First Name:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "firstName",
         onChange: this.handleInputChange,
         value: applicantInfo.firstName
-      }), "\xA0\xA0\xA0\xA0 Middle Name:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Middle Name:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "middleName",
         onChange: this.handleInputChange,
         value: applicantInfo.middleName
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Last Name:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Last Name:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "lastName",
         onChange: this.handleInputChange,
         value: applicantInfo.lastName
-      }), "\xA0\xA0\xA0\xA0 Suffix:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Suffix:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "suffix",
         onChange: this.handleInputChange,
         value: applicantInfo.suffix
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Address1:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Address1:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "address1",
         onChange: this.handleInputChange,
         value: applicantInfo.address1
-      }), "\xA0\xA0\xA0\xA0 Address2:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Address2:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "address2",
         onChange: this.handleInputChange,
         value: applicantInfo.address2
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Barangay:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Barangay:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "barangay",
         onChange: this.handleInputChange,
         value: applicantInfo.barangay
-      }), "\xA0\xA0\xA0\xA0 City:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "City:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "city",
         onChange: this.handleInputChange,
         value: applicantInfo.city
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Province:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Province:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "province",
         onChange: this.handleInputChange,
         value: applicantInfo.province
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Gender:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Gender:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "gender",
         onChange: this.handleInputChange,
         value: applicantInfo.gender
-      }), "\xA0\xA0\xA0\xA0 Civil Status:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Civil status:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "civilStatus",
         onChange: this.handleInputChange,
         value: applicantInfo.civilStatus
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Date of Birth:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Date of Birth:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         type: "date",
         name: "dateBirth",
         onChange: this.handleInputChange,
         value: applicantInfo.dateBirth
-      }), "\xA0\xA0\xA0\xA0 Birth Place:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
-        name: "birthPlace",
-        onChange: this.handleInputChange,
-        value: applicantInfo.birthPlace
-      }), "\xA0\xA0\xA0\xA0 Religion:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Religion:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "religion",
         onChange: this.handleInputChange,
         value: applicantInfo.religion
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Height:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Birth Place:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
+        name: "birthPlace",
+        onChange: this.handleInputChange,
+        value: applicantInfo.birthPlace
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "150px"
+      }, "Height:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "height",
         onChange: this.handleInputChange,
         value: applicantInfo.height
-      }), "\xA0\xA0\xA0\xA0 Weight:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "150px"
+      }, "Weight:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "weight",
         onChange: this.handleInputChange,
         value: applicantInfo.weight
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Occupation:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Occupation:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "occupation",
         onChange: this.handleInputChange,
         value: applicantInfo.occupation
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Citizenship:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Citizenship:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "citizenship",
         onChange: this.handleInputChange,
         value: applicantInfo.citizenship
-      }), "\xA0\xA0\xA0\xA0 Contact No.\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Contact No.:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "contactNumber",
         onChange: this.handleInputChange,
         value: applicantInfo.contactNumber
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Purpose:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Purpose:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "purpose",
         onChange: this.handleInputChange,
         value: applicantInfo.purpose
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "Residence Cert:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Residence Cert:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "certResidency",
         onChange: this.handleInputChange,
         value: applicantInfo.certResidency
-      }), "\xA0\xA0\xA0\xA0 Issued At:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputText__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "Issued At:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         name: "certResidencyIssuedAt",
         onChange: this.handleInputChange,
         value: applicantInfo.certResidencyIssuedAt
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, "CTC Date Issued:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_5__["default"], {
+        width: "350px"
+      }, "CTC Date Issued:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        fullWidth: true,
         type: "date",
         name: "ctcIssuedDate",
         onChange: this.handleInputChange,
         value: applicantInfo.ctcIssuedDate
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_4__["default"], {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_6__["default"], {
         type: "button",
         onClick: function onClick(e) {
           e.preventDefault();
@@ -713,17 +825,20 @@ function (_React$Component) {
 
       var supreme = this.supreme;
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "ID Photo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Require Identification Image to be taken.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
-        flexDirection: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-4"
+        align: "center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        addSideMarginForChildren: "sm",
+        flexDirection: "row",
+        width: "100%",
+        withVerticalPadding: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        width: "50%",
+        align: "center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "my_camera"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-1"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-4"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        width: "50%",
+        align: "center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "results"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
@@ -731,23 +846,28 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "hidden",
         id: "captured_text"
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        className: "col-sm-4"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        addSideMarginForChildren: "sm",
+        flexDirection: "row",
+        width: "200px",
+        withVerticalPadding: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        width: "50%",
+        align: "center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        value: "Take Snapshot",
         onClick: this.cameraSnapshot
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+      }, "capture")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        width: "50%",
+        align: "center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
-        value: "Reset",
         onClick: function onClick(e) {
           return _this2.updateStateApplicantIDPhoto({
             blob: ''
           });
         }
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
+      }, "reset")))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_3__["default"], {
         type: "button",
         onClick: function onClick(e) {
           _this2.supreme.switchPageHandler('applicantFingerPrint');
@@ -1856,23 +1976,40 @@ function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) r
 
 
 var Box = styled_components__WEBPACK_IMPORTED_MODULE_1___default()(function (_ref) {
-  var flexDirection = _ref.flexDirection,
+  var addSideMarginForChildren = _ref.addSideMarginForChildren,
+      flexDirection = _ref.flexDirection,
       justifyMe = _ref.justifyMe,
       position = _ref.position,
+      withHorizontalPadding = _ref.withHorizontalPadding,
+      withVerticalPadding = _ref.withVerticalPadding,
       borderStyle = _ref.borderStyle,
       backgroundColor = _ref.backgroundColor,
       height = _ref.height,
       width = _ref.width,
-      otherProps = _objectWithoutProperties(_ref, ["flexDirection", "justifyMe", "position", "borderStyle", "backgroundColor", "height", "width"]);
+      otherProps = _objectWithoutProperties(_ref, ["addSideMarginForChildren", "flexDirection", "justifyMe", "position", "withHorizontalPadding", "withVerticalPadding", "borderStyle", "backgroundColor", "height", "width"]);
 
   return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", otherProps);
+}).attrs({
+  addSideMarginForChildren: function addSideMarginForChildren(props) {
+    return props.theme.margin[props.addSideMarginForChildren] || 0;
+  },
+  withHorizontalPadding: function withHorizontalPadding(props) {
+    return props.theme.padding[props.withHorizontalPadding] || 0;
+  },
+  withVerticalPadding: function withVerticalPadding(props) {
+    return props.theme.padding[props.withVerticalPadding] || 0;
+  }
 }).withConfig({
   displayName: "box__Box",
   componentId: "h351l5-0"
-})(["display:", ";flex-direction:", ";border-style:", ";", " ", " ", " ", " ", ""], function (p) {
+})(["display:", ";flex-direction:", ";padding:", ";border-style:", ";", " ", " ", " ", " ", " ", ""], function (p) {
   return p.flexDirection ? "flex" : "block";
 }, function (p) {
   return p.flexDirection || "column";
+}, function (props) {
+  var horizontalPadding = props.withHorizontalPadding;
+  var verticalPadding = props.withVerticalPadding;
+  return "".concat(verticalPadding, " ").concat(horizontalPadding);
 }, function (p) {
   return p.borderStyle;
 }, function (p) {
@@ -1885,6 +2022,8 @@ var Box = styled_components__WEBPACK_IMPORTED_MODULE_1___default()(function (_re
   return p.position && "position: ".concat(p.position);
 }, function (p) {
   return p.justifyMe && "\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n  ";
+}, function (p) {
+  return p.addSideMarginForChildren && "\n    > * {\n      &:not(:last-child) {\n        margin-right: ".concat(p.addSideMarginForChildren, ";\n      }\n    }\n  ");
 });
 /* harmony default export */ __webpack_exports__["default"] = (Box);
 
@@ -2039,6 +2178,137 @@ function Header(props) {
 }
 
 /* harmony default export */ __webpack_exports__["default"] = (Header);
+
+/***/ }),
+
+/***/ "./pages/ui/input.js":
+/*!***************************!*\
+  !*** ./pages/ui/input.js ***!
+  \***************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+
+
+var Input = styled_components__WEBPACK_IMPORTED_MODULE_1___default()(function (_ref) {
+  var block = _ref.block,
+      display = _ref.display,
+      fullWidth = _ref.fullWidth,
+      width = _ref.width,
+      marginBottom = _ref.marginBottom,
+      otherProps = _objectWithoutProperties(_ref, ["block", "display", "fullWidth", "width", "marginBottom"]);
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", otherProps);
+}).attrs({
+  display: function display(props) {
+    return props.block ? 'block' : 'inline-block';
+  },
+  width: function width(props) {
+    if (props.fullWidth) {
+      return '100%';
+    }
+
+    return props.width || 'initial';
+  }
+}).withConfig({
+  displayName: "input__Input",
+  componentId: "sc-1jbu3ka-0"
+})(["border:1px solid ", ";border-radius:", ";color:", ";display:", ";line-height:initial;outline:none;padding:", ";width:", ";&[disabled],&[readonly]{background-color:", ";}&:not(:last-child){margin-bottom:", ";}::placeholder{color:", ";}"], function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.theme.misc.borderRadius;
+}, function (props) {
+  return props.theme.colors.black;
+}, function (props) {
+  return props.display;
+}, function (props) {
+  return props.theme.padding.sm;
+}, function (props) {
+  return props.width;
+}, function (props) {
+  return props.theme.colors.primaryLight;
+}, function (props) {
+  return props.marginBottom ? props.marginBottom : props.theme.margin.sm;
+}, function (props) {
+  return props.theme.colors.primary;
+});
+/* harmony default export */ __webpack_exports__["default"] = (Input);
+
+/***/ }),
+
+/***/ "./pages/ui/inputLabel.js":
+/*!********************************!*\
+  !*** ./pages/ui/inputLabel.js ***!
+  \********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
+/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+
+/* eslint-disable jsx-a11y/label-has-for */
+
+
+var InputLabel = styled_components__WEBPACK_IMPORTED_MODULE_1___default()(function (_ref) {
+  var labelInlineBlock = _ref.labelInlineBlock,
+      inline = _ref.inline,
+      labelTopMargin = _ref.labelTopMargin,
+      labelBottomMargin = _ref.labelBottomMargin,
+      inputDisplay = _ref.inputDisplay,
+      inputTopMargin = _ref.inputTopMargin,
+      width = _ref.width,
+      otherProps = _objectWithoutProperties(_ref, ["labelInlineBlock", "inline", "labelTopMargin", "labelBottomMargin", "inputDisplay", "inputTopMargin", "width"]);
+
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", otherProps);
+}).attrs({
+  inputDisplay: function inputDisplay(props) {
+    return props.inline ? 'inline' : 'block';
+  },
+  inputTopMargin: function inputTopMargin(props) {
+    return props.inline ? '0' : props.theme.margin.sm;
+  }
+}).withConfig({
+  displayName: "inputLabel__InputLabel",
+  componentId: "sc-1wh580t-0"
+})(["color:", ";display:", ";margin-bottom:", ";margin-top:", ";", " &:not(:last-child){margin-bottom:", ";}input,textarea{display:", ";margin-top:", ";}select,.select2-container{display:", ";margin-top:", ";}"], function (props) {
+  return props.theme.colors.primary;
+}, function (props) {
+  return props.labelInlineBlock ? 'inline-block' : 'block';
+}, function (props) {
+  return props.labelInlineBlock && !props.labelBottomMargin ? '0px !important' : "".concat(props.theme.margin.sm, " !important");
+}, function (props) {
+  return props.labelTopMargin ? props.theme.margin.sm : 'initial';
+}, function (props) {
+  return props.width ? "width: ".concat(props.width, ";") : '200px';
+}, function (props) {
+  return props.theme.margin.md;
+}, function (props) {
+  return props.inputDisplay;
+}, function (props) {
+  return props.inputTopMargin;
+}, function (props) {
+  return props.inputDisplay;
+}, function (props) {
+  return props.inputTopMargin;
+});
+/* harmony default export */ __webpack_exports__["default"] = (InputLabel);
 
 /***/ }),
 

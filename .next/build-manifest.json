@@ -14,10 +14,6 @@
     "/client/certification-form": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
-    ],
-    "/client/certification-entries": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
     ]
   }
 }

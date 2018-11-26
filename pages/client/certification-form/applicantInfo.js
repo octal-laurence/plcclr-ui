@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import Box from '../../ui/box';
 import InputText from '../../ui/inputText';
+import Input from '../../ui/input';
+import InputLabel from '../../ui/inputLabel';
 import Button from '../../ui/button';
 
 class ApplicantInfo extends React.Component {
@@ -30,181 +32,240 @@ class ApplicantInfo extends React.Component {
         </p>
         <hr />
         <Box>
-          <Box>
-            First Name:&nbsp;
-            <InputText
-              name="firstName"
-              onChange={this.handleInputChange}
-              value={applicantInfo.firstName}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            Middle Name:&nbsp;
-            <InputText
-              name="middleName"
-              onChange={this.handleInputChange}
-              value={applicantInfo.middleName}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              First Name:
+              <Input
+                fullWidth
+                name="firstName"
+                onChange={this.handleInputChange}
+                value={applicantInfo.firstName}
+              />
+            </InputLabel>
+            <InputLabel width="350px">
+              Middle Name:
+              <Input
+                fullWidth
+                name="middleName"
+                onChange={this.handleInputChange}
+                value={applicantInfo.middleName}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Last Name:&nbsp;
-            <InputText
-              name="lastName"
-              onChange={this.handleInputChange}
-              value={applicantInfo.lastName}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            Suffix:&nbsp;
-            <InputText
-              name="suffix"
-              onChange={this.handleInputChange}
-              value={applicantInfo.suffix}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Last Name:
+              <Input
+                fullWidth
+                name="lastName"
+                onChange={this.handleInputChange}
+                value={applicantInfo.lastName}
+              />
+            </InputLabel>
+            <InputLabel width="350px">
+              Suffix:
+              <Input
+                fullWidth
+                name="suffix"
+                onChange={this.handleInputChange}
+                value={applicantInfo.suffix}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Address1:&nbsp;
-            <InputText
-              name="address1"
-              onChange={this.handleInputChange}
-              value={applicantInfo.address1}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            Address2:&nbsp;
-            <InputText
-              name="address2"
-              onChange={this.handleInputChange}
-              value={applicantInfo.address2}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Address1:
+              <Input
+                fullWidth
+                name="address1"
+                onChange={this.handleInputChange}
+                value={applicantInfo.address1}
+              />
+            </InputLabel>
+            <InputLabel width="350px">
+              Address2:
+              <Input
+                fullWidth
+                name="address2"
+                onChange={this.handleInputChange}
+                value={applicantInfo.address2}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Barangay:&nbsp;
-            <InputText
-              name="barangay"
-              onChange={this.handleInputChange}
-              value={applicantInfo.barangay}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            City:&nbsp;
-            <InputText
-              name="city"
-              onChange={this.handleInputChange}
-              value={applicantInfo.city}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Barangay:
+              <Input
+                fullWidth
+                name="barangay"
+                onChange={this.handleInputChange}
+                value={applicantInfo.barangay}
+              />
+            </InputLabel>
+            <InputLabel width="350px">
+              City:
+              <Input
+                fullWidth
+                name="city"
+                onChange={this.handleInputChange}
+                value={applicantInfo.city}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Province:&nbsp;
-            <InputText
-              name="province"
-              onChange={this.handleInputChange}
-              value={applicantInfo.province}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Province:
+              <Input
+                fullWidth
+                name="province"
+                onChange={this.handleInputChange}
+                value={applicantInfo.province}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Gender:&nbsp;
-            <InputText
-              name="gender"
-              onChange={this.handleInputChange}
-              value={applicantInfo.gender}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            Civil Status:&nbsp;
-            <InputText
-              name="civilStatus"
-              onChange={this.handleInputChange}
-              value={applicantInfo.civilStatus}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Gender:
+              <Input
+                fullWidth
+                name="gender"
+                onChange={this.handleInputChange}
+                value={applicantInfo.gender}
+              />
+            </InputLabel>
+            <InputLabel width="350px">
+              Civil status:
+              <Input
+                fullWidth
+                name="civilStatus"
+                onChange={this.handleInputChange}
+                value={applicantInfo.civilStatus}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Date of Birth:&nbsp;
-            <input 
-              type="date"
-              name="dateBirth"
-              onChange={this.handleInputChange}
-              value={applicantInfo.dateBirth}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            Birth Place:&nbsp;
-            <InputText
-              name="birthPlace"
-              onChange={this.handleInputChange}
-              value={applicantInfo.birthPlace}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            Religion:&nbsp;
-            <InputText
-              name="religion"
-              onChange={this.handleInputChange}
-              value={applicantInfo.religion}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Date of Birth:
+              <Input
+                fullWidth
+                type="date"
+                name="dateBirth"
+                onChange={this.handleInputChange}
+                value={applicantInfo.dateBirth}
+              />
+            </InputLabel>
+            <InputLabel width="350px">
+              Religion:
+              <Input
+                fullWidth
+                name="religion"
+                onChange={this.handleInputChange}
+                value={applicantInfo.religion}
+              />
+            </InputLabel>
+            <InputLabel width="350px">
+              Birth Place:
+              <Input
+                fullWidth
+                name="birthPlace"
+                onChange={this.handleInputChange}
+                value={applicantInfo.birthPlace}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Height:&nbsp;
-            <InputText
-              name="height"
-              onChange={this.handleInputChange}
-              value={applicantInfo.height}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            Weight:&nbsp;
-            <InputText
-              name="weight"
-              onChange={this.handleInputChange}
-              value={applicantInfo.weight}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="150px">
+              Height:
+              <Input
+                fullWidth
+                name="height"
+                onChange={this.handleInputChange}
+                value={applicantInfo.height}
+              />
+            </InputLabel>
+            <InputLabel width="150px">
+              Weight:
+              <Input
+                fullWidth
+                name="weight"
+                onChange={this.handleInputChange}
+                value={applicantInfo.weight}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Occupation:&nbsp;
-            <InputText
-              name="occupation"
-              onChange={this.handleInputChange}
-              value={applicantInfo.occupation}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Occupation:
+              <Input
+                fullWidth
+                name="occupation"
+                onChange={this.handleInputChange}
+                value={applicantInfo.occupation}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Citizenship:&nbsp;
-            <InputText
-              name="citizenship"
-              onChange={this.handleInputChange}
-              value={applicantInfo.citizenship}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            Contact No.&nbsp;
-            <InputText
-              name="contactNumber"
-              onChange={this.handleInputChange}
-              value={applicantInfo.contactNumber}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Citizenship:
+              <Input
+                fullWidth
+                name="citizenship"
+                onChange={this.handleInputChange}
+                value={applicantInfo.citizenship}
+              />
+            </InputLabel>
+            <InputLabel width="350px">
+              Contact No.:
+              <Input
+                fullWidth
+                name="contactNumber"
+                onChange={this.handleInputChange}
+                value={applicantInfo.contactNumber}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Purpose:&nbsp;
-            <InputText
-              name="purpose"
-              onChange={this.handleInputChange}
-              value={applicantInfo.purpose}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Purpose:
+              <Input
+                fullWidth
+                name="purpose"
+                onChange={this.handleInputChange}
+                value={applicantInfo.purpose}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            Residence Cert:&nbsp;
-            <InputText
-              name="certResidency"
-              onChange={this.handleInputChange}
-              value={applicantInfo.certResidency}
-            />
-            &nbsp;&nbsp;&nbsp;&nbsp;
-            Issued At:&nbsp;
-            <InputText
-              name="certResidencyIssuedAt"
-              onChange={this.handleInputChange}
-              value={applicantInfo.certResidencyIssuedAt}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              Residence Cert:
+              <Input
+                fullWidth
+                name="certResidency"
+                onChange={this.handleInputChange}
+                value={applicantInfo.certResidency}
+              />
+            </InputLabel>
+            <InputLabel width="350px">
+              Issued At:
+              <Input
+                fullWidth
+                name="certResidencyIssuedAt"
+                onChange={this.handleInputChange}
+                value={applicantInfo.certResidencyIssuedAt}
+              />
+            </InputLabel>
           </Box><br />
-          <Box>
-            CTC Date Issued:&nbsp;
-            <input 
-              type="date"
-              name="ctcIssuedDate"
-              onChange={this.handleInputChange}
-              value={applicantInfo.ctcIssuedDate}
-            />
+          <Box flexDirection="row" addSideMarginForChildren="sm">
+            <InputLabel width="350px">
+              CTC Date Issued:
+              <Input
+                fullWidth
+                type="date"
+                name="ctcIssuedDate"
+                onChange={this.handleInputChange}
+                value={applicantInfo.ctcIssuedDate}
+              />
+            </InputLabel>
           </Box><br />
           <Box>
             <Button

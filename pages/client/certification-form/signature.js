@@ -25,7 +25,7 @@ class Signature extends React.Component {
     const supreme = this.props.supreme;
 
     return (
-      <div>
+      <Box withVerticalPadding="md">
         <Box>
           <h3>
             Signature
@@ -114,7 +114,7 @@ class Signature extends React.Component {
         <Head>
           <script src="/static/sdk/signature/sigapp.js" />
         </Head>
-      </div>
+      </Box>
     );
   }
 }

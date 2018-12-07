@@ -33,7 +33,7 @@ const Box = styled(({
   ${p => (p.width) && `min-width: ${p.width}; max-width: ${p.width};`}
   ${p => (p.backgroundColor) && `background-color: ${p.backgroundColor};`}
 
-  ${p => (p.position) && `position: ${p.position}`}
+  ${p => (p.position) && `position: ${p.position};`}
   ${p => (p.justifyMe) && `
     position: absolute;
     top: 50%;

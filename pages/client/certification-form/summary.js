@@ -38,7 +38,7 @@ class Summary extends React.Component {
     }
 
     return (
-      <div>
+      <Box withVerticalPadding="md">
         <Box>
           <h3>
             Summary
@@ -58,7 +58,7 @@ class Summary extends React.Component {
             ), (<br />)].map((elem) => elem)) 
           }
         </Box>
-      </div>
+      </Box>
     );
   }
 }

@@ -166,7 +166,7 @@ class FingerPrint extends React.Component {
   }
   render() {
     return (
-      <div>
+      <Box withVerticalPadding="md">
         <Box>
           <h3>
             Finger Print
@@ -194,7 +194,7 @@ class FingerPrint extends React.Component {
         <Head>
           <script src="/static/sdk/fingerPrintScanner/customApp.js" />
         </Head>
-      </div>
+      </Box>
     );
   }
 }

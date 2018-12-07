@@ -23,7 +23,7 @@ class ApplicantInfo extends React.Component {
     const supreme = this.props.supreme;
     const applicantInfo = supreme.state.applicantInfo;
     return (
-      <div padding="100px">
+      <Box withVerticalPadding="md">
         <h3>
           Applicant Form
         </h3>
@@ -279,7 +279,7 @@ class ApplicantInfo extends React.Component {
             </Button>
           </Box>
         </Box>
-      </div>
+      </Box>
     );
   }
 }

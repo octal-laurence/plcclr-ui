@@ -255,8 +255,8 @@ function (_React$Component) {
     value: function render() {
       var supreme = this.props.supreme;
       var applicantInfo = supreme.state.applicantInfo;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        padding: "100px"
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        withVerticalPadding: "md"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Applicant Form"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Input Applicant Personal Details"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
         flexDirection: "row",
         addSideMarginForChildren: "sm"
@@ -685,7 +685,9 @@ function (_React$Component) {
     value: function render() {
       var _this5 = this;
 
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Finger Print"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Require Finger Print to be taken.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), this.state.fingerPrintSubj === '' ? this.renderFingerPrintProjector() : this.renderFingerPrintScanner(this.state.fingerPrintSubj), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_4__["default"], {
+        withVerticalPadding: "md"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Finger Print"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Require Finger Print to be taken.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), this.state.fingerPrintSubj === '' ? this.renderFingerPrintProjector() : this.renderFingerPrintScanner(this.state.fingerPrintSubj), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_6__["default"], {
         type: "button",
         onClick: function onClick(e) {
           _this5.supreme.switchPageHandler('applicantSignature');
@@ -824,7 +826,9 @@ function (_React$Component) {
       var _this2 = this;
 
       var supreme = this.supreme;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "ID Photo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Require Identification Image to be taken.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        withVerticalPadding: "md"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "ID Photo"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Require Identification Image to be taken.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
         align: "center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
         addSideMarginForChildren: "sm",
@@ -1314,7 +1318,9 @@ function (_React$Component) {
       var _this2 = this;
 
       var supreme = this.props.supreme;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_3__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Signature"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Write Digital Signature.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_3__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        withVerticalPadding: "md"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_3__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Signature"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Write Digital Signature.")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_3__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         id: "signature-pad",
         className: "signature-pad"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1527,7 +1533,9 @@ function (_React$Component) {
           label: 'CTC issue date'
         }
       };
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Summary"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Information Summary")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, Object.entries(supreme.state.applicantInfo).map(function (_ref) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        withVerticalPadding: "md"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Summary"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Information Summary")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_2__["default"], null, Object.entries(supreme.state.applicantInfo).map(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             k = _ref2[0],
             v = _ref2[1];
@@ -2019,7 +2027,7 @@ var Box = styled_components__WEBPACK_IMPORTED_MODULE_1___default()(function (_re
 }, function (p) {
   return p.backgroundColor && "background-color: ".concat(p.backgroundColor, ";");
 }, function (p) {
-  return p.position && "position: ".concat(p.position);
+  return p.position && "position: ".concat(p.position, ";");
 }, function (p) {
   return p.justifyMe && "\n    position: absolute;\n    top: 50%;\n    left: 50%;\n    transform: translate(-50%, -50%);\n  ";
 }, function (p) {

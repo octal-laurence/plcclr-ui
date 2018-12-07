@@ -63,7 +63,7 @@ class IDPhoto extends React.Component {
     const supreme = this.supreme;
 
     return (
-      <div>
+      <Box withVerticalPadding="md">
         <Box>
           <h3>
             ID Photo
@@ -125,7 +125,7 @@ class IDPhoto extends React.Component {
             Confirm and Go to Next Tab
           </Button>
         </Box>
-      </div>
+      </Box>
     );
   }
 }

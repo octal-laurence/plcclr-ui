@@ -178,8 +178,12 @@ class CertificationPreview extends React.Component {
                         display: 'block',
                         width: '100%',
                         height: 'auto',
+                        borderStyle: 'groove'
                       }}
                     />
+                    <Box align="center">
+                      ID Picture
+                    </Box>
                   </Box>
                 </Box>
                 <Box
@@ -203,27 +207,33 @@ class CertificationPreview extends React.Component {
                           height="150px"
                           width="50%"
                         >
+                          <Box>
+                            Left Thumb
+                          </Box>
                           <img
                             src={applicant.data.applicant.applicantFingerPrints && `data:image/png;base64,${applicant.data.applicant.applicantFingerPrints.leftThumb}`}
                             style={{
                               display: 'block',
                               width: 'auto',
-                              height: '100%',
+                              height: '80%',
                             }}
                           />
                         </Box>
                         <Box 
-                          className="leftThumb"
+                          className="rightThumb"
                           borderStyle="groove"
                           height="150px"
                           width="50%"
                         >
+                          <Box>
+                            Right Thumb
+                          </Box>
                           <img
                             src={applicant.data.applicant.applicantFingerPrints && `data:image/png;base64,${applicant.data.applicant.applicantFingerPrints.rightThumb}`}
                             style={{
                               display: 'block',
                               width: 'auto',
-                              height: '100%',
+                              height: '80%',
                             }}
                           />
                         </Box>
@@ -235,7 +245,6 @@ class CertificationPreview extends React.Component {
                       align="center"
                     >
                       <Box
-                        borderStyle="groove"
                         width="200px"
                       >
                         <img
@@ -244,8 +253,12 @@ class CertificationPreview extends React.Component {
                             display: 'block',
                             width: '100%',
                             height: 'auto',
+                            'border-bottom': '2px groove'
                           }}
                         />
+                        <Box>
+                          Signature
+                        </Box>
                       </Box>
                     </Box>
                   </Box>

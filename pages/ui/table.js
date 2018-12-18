@@ -13,7 +13,7 @@ const Table = styled(({
 `;
 
 const TableBody = styled.tbody`
-
+  
 `;
 
 const TableData = styled(({

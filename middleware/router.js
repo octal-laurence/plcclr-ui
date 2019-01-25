@@ -19,7 +19,7 @@ export default (path, data = {}) => {
       resolve(data);
     })
     .catch(err => {
-      console.log(err);``
+      console.log(err);
       reject(err)
     });
   });

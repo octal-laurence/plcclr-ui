@@ -20,7 +20,7 @@ const Table = styled(({
 `;
 
 const TableBody = styled.tbody`
-  display:block;
+  display: block;
   width: 100%;
   overflow: auto;
   height: ${p => p.tblHeight};

@@ -1,7 +1,14 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 
+import Layout from './layout';
 import Wrapper from './wrapper';
-import App from './app';
+
+const App = () => (
+  <Layout>
+    <div>
+      Police Clearance
+    </div>
+  </Layout>
+);
 
 export default () => Wrapper(App);

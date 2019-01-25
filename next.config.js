@@ -1,2 +1,7 @@
-const withCSS = require('@zeit/next-css')
-module.exports = withCSS()
+const config = require('config');
+
+module.exports = {
+  publicRuntimeConfig: { // Will be available on both server and client
+    object: {sample: 1}
+  }
+}

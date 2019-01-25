@@ -9,6 +9,7 @@ import NavTabs from '../../components/navTabs';
 import Box from '../../ui/box';
 
 import post from '../../../middleware/router';
+import {getApplicationEntry} from 'model/policeClearanceCertifications';
 
 class CertificationPreview extends React.Component {
   constructor(props) {
@@ -63,50 +64,53 @@ class CertificationPreview extends React.Component {
       weight: { label: 'weight' },
     };
 
-    this.getApplicantEntry = ((id) => {
-      const setApplicantData = ((state = {}) => {
-        this.setState({
+    this.getApplicantionEntry = this.getApplicantionEntry.bind(this);
+  }
+  getApplicantionEntry(id) {
+    const setApplicantData = ((state = {}) => {
+      this.setState({
+        applicant: {
+          ...this.state.applicant,
+          ...state
+        } 
+      }, (state) => console.log(this.state.applicant));
+    });
+
+    setApplicantData({ loading: true });
+
+    // Remove Soon
+    // post(`/police-clearance-certification/getRecord`, {id: `#${id}`})
+
+    getApplicationEntry(`#${id}`)
+    .then(data => {
+      const { applicant, address, ...certification } = data;
+
+      setApplicantData({
+        loading: false,
+        data: {
+          certification,
           applicant: {
-            ...this.state.applicant,
-            ...state
-          } 
-        }, (state) => console.log(this.state.applicant));
-      });
-
-      setApplicantData({ loading: true });
-
-      post(`/police-clearance-certification/getRecord`, {id: `#${id}`})
-      .then(data => {
-        const { applicant, address, ...certification } = data;
-
-        setApplicantData({
-          loading: false,
-          data: {
-            certification,
-            applicant: {
-              ...applicant,
-              address: (({address1,address2,barangay,city,province}) => {
-                          return `${address1} ${address2} ${barangay}, ${city} ${province}`
-                        })(address)
-            }
+            ...applicant,
+            address: (({address1,address2,barangay,city,province}) => {
+                        return `${address1} ${address2} ${barangay}, ${city} ${province}`
+                      })(address)
           }
-        });
-      })
-      .catch(err => {
-        setApplicantData({
-          loading: false,
-          error: err.message
-        });
+        }
       });
-    }).bind(this);
+    })
+    .catch(err => {
+      setApplicantData({
+        loading: false,
+        error: err.message
+      });
+    });
   }
   componentDidMount() {
     const {query} = this.props.router;
-    this.getApplicantEntry(query.id);
+    this.getApplicantionEntry(query.id);
   }
   render() {
     const {applicant} = this.state;
-    console.log(applicant)
 
     return (
       <Layout>
@@ -127,12 +131,12 @@ class CertificationPreview extends React.Component {
                 :
                 <Box>
                   { Object.entries(this.certificationInfo)
-                    .map(([k, v]) => [(
-                      <Box key={k}>
+                    .map(([k, v], i) => (
+                      <Box key={i}>
                         { v.label } :&nbsp;
                         <label><u>{ applicant.data.certification[k] || null }</u></label>
                       </Box>
-                    ), (<br />)].map((elem) => elem)) 
+                    )) 
                   }
                 </Box>
               }
@@ -145,15 +149,15 @@ class CertificationPreview extends React.Component {
                 :
                 <Box>
                   { Object.entries(this.applicantInfo)
-                    .map(([k, v]) => [(
-                      <Box key={k}>
+                    .map(([k, v]) => (
+                      <Box key={`${k}`}>
                         { v.label } :&nbsp;
                         <label><u>{ applicant.data.applicant[k] || null }</u></label>
                       </Box>
-                    ), (<br />)].map((elem) => elem)) 
+                    )) 
                   }
                 </Box>
-              }
+              } 
             </Box>
             <Box>
               <h4 align="center">Identification</h4>

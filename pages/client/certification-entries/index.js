@@ -5,13 +5,21 @@ import Head from 'next/head';
 
 import Wrapper from '../../wrapper';
 import Layout from '../../layout';
-import NavTabs from '../../components/navTabs';
 
-import Box from '../../ui/box';
-import TableCP from '../../ui/library/tableCP';
-import Button from '../../ui/button';
+import Box from 'pages/ui/box';
+import Button from 'pages/ui/button';
+import {
+  Table,
+  TableHead,
+  TableBody,
+  Tblh,
+  Tbld,
+  BoxTable,
+} from 'pages/ui/library/tableCP/table';
 
+// misc
 import post from '../../../middleware/router';
+import {listCertificationEntries} from 'model/policeClearanceCertifications';
 
 class CertificationEntries extends React.Component {
   constructor(props) {
@@ -26,27 +34,34 @@ class CertificationEntries extends React.Component {
       }
     };
 
-    this.listCertificationEntries = (() => {
-      return new Promise((resolve, reject) => {
-        post(`/police-clearance-certification/list`, {
-          pgSkip: this.state.certificationEntries.page,
-        })
-        .then(list => {
-          this.setState({
-            certificationEntries: {
-              ...this.state.certificationEntries,
-              page: this.state.certificationEntries.page +1,
-            }
-          });
-          resolve(list);
-        })
-        .catch(err => {
-          reject(err);
-        });
-      })
-    }).bind(this);
-
     this.renderTableCP = this.renderTableCP.bind(this);
+    this.listCertificationEntries = this.listCertificationEntries.bind(this);
+  }
+  listCertificationEntries() {
+    listCertificationEntries({
+      pgSkip: this.state.certificationEntries.page,
+    })
+    .then(result => {
+      this.setState({
+        certificationEntries: {
+          ...this.state.certificationEntries,
+          loading: false,
+          page: this.state.certificationEntries.page +1,
+          data: [
+            ...this.state.certificationEntries.data,
+            ...result,
+          ]
+        }
+      });
+    })
+    .catch(err => {
+      this.setState({
+        certificationEntries: {
+          ...this.state.certificationEntries,
+          loading: false,
+        }
+      });
+    });
   }
   renderTableCP() {
     const certificationEntries = this.state.certificationEntries;
@@ -60,12 +75,85 @@ class CertificationEntries extends React.Component {
     ];
 
     return (
-      <TableCP 
-        columns={dataColumns}
-        sourceData={this.listCertificationEntries}
-        serverSideRoute={`/police-clearance-certification/list`}
-      />
+      <BoxTable>
+        <Box>
+          Filter Name:&nbsp;<input type="text"/>
+          <button
+            type="button"
+          >
+            search
+          </button>
+        </Box><br />
+        <Table>
+          <TableHead>
+            <tr>
+              { dataColumns.map(([acce, header]) => (
+                  <Tblh key={acce}>{header}</Tblh>
+                ))
+              }
+            </tr>
+          </TableHead>
+          <TableBody tblHeight='650px'>
+            { certificationEntries.data.map((data, i) => (
+                <tr key={i}>
+                  { dataColumns.map(([accessor, , linkOpt={}]) => {
+                    const {link, route} = linkOpt;
+                    const tblData = ((input) => {
+                      const keys = input.split('.');
+                      if (!(keys.length > 1)) {
+                        return data[input];
+                      }
+
+                      let value;
+                      keys.map(key => {
+                        if (key != '') {
+                          value = (value === undefined) ? data[key] : value[key];
+                        }
+                      });
+                      return value
+                    })(accessor);
+                    return (
+                        <Tbld key={accessor}>
+                          { ((link && link === 1) && (route && route != ``)) ?
+                            <a href={`${route}${tblData}`} >{tblData}</a>
+                            :
+                            tblData
+                          }
+                        </Tbld>
+                      )
+                    })
+                  }
+                </tr>
+              ))
+            }
+          </TableBody>
+        </Table>
+        <Box align="center">
+          { this.state.certificationEntries.loading }
+          { this.state.certificationEntries.loading && `loading...` }
+          { !this.state.certificationEntries.loading &&
+            (this.state.certificationEntries.hasFetchedAll ?
+              `No more result.`
+              :
+              <Button
+                centered
+                type="button"
+                onClick={e => {
+                  this.setState({
+                    dataSet: 'series',
+                  });
+                }}
+              >
+                load more
+              </Button>
+            )
+          }
+        </Box>
+      </BoxTable>
     );
+  }
+  componentDidMount() {
+    this.listCertificationEntries();
   }
   render() {
     return (
@@ -73,10 +161,6 @@ class CertificationEntries extends React.Component {
         inSidebarNavLink={this.props.router.asPath}
       >
         <Box>
-          <Box>
-            List
-            <hr />
-          </Box>
           { this.renderTableCP() }
         </Box>
       </Layout>
@@ -85,5 +169,4 @@ class CertificationEntries extends React.Component {
 }
 
 const InjectedRouter = withRouter(CertificationEntries);
-
 export default () => Wrapper(InjectedRouter);

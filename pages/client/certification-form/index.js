@@ -5,12 +5,10 @@ import Head from 'next/head';
 
 import Wrapper from '../../wrapper';
 import Layout from '../../layout';
-import NavTabs from '../../components/navTabs';
-import Sidebar from '../../components/sidebar';
 
-import Box from '../../ui/box';
-import InputText from '../../ui/inputText';
-import Button from '../../ui/button';
+import Box from 'pages/ui/box';
+import InputText from 'pages/ui/inputText';
+import Button from 'pages/ui/button';
 
 import ApplicantInfo from './applicantInfo';
 import ApplicantIDPhoto from './idPhoto';
@@ -18,7 +16,9 @@ import ApplicantFingerPrint from './fingerPrint';
 import ApplicantSignature from './signature';
 import ApplicantInfoSummary from './summary';
 
+// misc
 import post from '../../../middleware/router';
+import {newApplicantionEntry} from 'model/policeClearanceCertifications';
 
 class CertificationForm extends React.Component {
   constructor(props) {
@@ -86,6 +86,36 @@ class CertificationForm extends React.Component {
         json[elem.tab] = 0;
         return json;
       }, {})
+
+      // TESTING ONLY, REMOVE-SOON
+      ,
+      ...{
+          applicantInfo: {
+          firstName: 'ACE',
+          lastName: 'ACE',
+          middleName: 'ACE',
+          suffix: 'ACE',
+          address1: 'ACE',
+          address2: 'ACE',
+          barangay: 'ACE',
+          city: 'ACE',
+          province: 'ACE',
+          gender: 'ACE',
+          civilStatus: 'ACE',
+          dateBirth: '09-09-1992',
+          birthPlace: 'ace',
+          religion: 'ace',
+          height: '5,7',
+          weight: '200',
+          occupation: 'ACE',
+          citizenship: 'ACE',
+          contactNumber: 'ACE',
+          purpose: 'ACE',
+          certResidency: 'ACE',
+          certResidencyIssuedAt: 'ACE',
+          ctcIssuedDate: '09-09-1992',
+        }
+      }
     };
 
     this.renderNavTabs = this.renderNavTabs.bind(this);
@@ -150,6 +180,8 @@ class CertificationForm extends React.Component {
       applicantSignature: this.state.applicantSignature.blob
     }
 
+    // Remove Soon
+    /*`
     post(`/police-clearance-certification/new`, applicantData)
     .then(([{certification}]) => {
       alert('Save Success');
@@ -160,8 +192,20 @@ class CertificationForm extends React.Component {
       alert(err.message);
       this.setState({ editing: { ...this.state.editing, loading: false, error: err.message } });
     });
+    `*/
+
+    newApplicantionEntry(applicantData)
+    .then(result => {
+      alert('Save Success');
+      window.location.href = `/certification-entries`;
+    })
+    .catch(err => {
+      alert(err.message);
+      this.setState({ editing: { ...this.state.editing, loading: false, error: err.message } });
+    });
   }
   componentDidMount() {
+    console.log(window);
     this.setState({ navTabs: { ...this.state.navTabs, applicantInfo: 1 } });
   }
   renderNavTabs() {
@@ -189,7 +233,7 @@ class CertificationForm extends React.Component {
       >
         <Box>
           { this.renderNavTabs() }
-          <div id="formContents" className="container">
+          <Box id="formContents" className="container">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -209,22 +253,22 @@ class CertificationForm extends React.Component {
                 <ApplicantSignature supreme={this} />
               }
               { this.state.navTabs.finalization === 1 &&
-                <div>
+                <Box>
                   <ApplicantInfoSummary supreme={this} />
                   <hr />
-                  <div className="container" align="right">
+                  <Box className="container" align="right">
                     { this.state.editing.loading ?
                       <label>Please Wait, Record is on Processing...</label>
                       :
-                      <button type="submit">
+                      <Button type="submit">
                         Save
-                      </button>
+                      </Button>
                     }
-                  </div>
-                </div>
+                  </Box>
+                </Box>
               }
             </form>
-          </div>
+          </Box>
         </Box>
         <Head>
           <title>Police Clearance</title>
@@ -243,5 +287,4 @@ class CertificationForm extends React.Component {
 }
 
 const InjectedRouter = withRouter(CertificationForm);
-
 export default () => Wrapper(InjectedRouter);

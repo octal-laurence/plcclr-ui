@@ -3,13 +3,12 @@ const rp = require('request-promise');
 
 class Plcclr {
   constructor(opts) {
-    // this._baseURL = "http://localhost:8000/PoliceClearanceCertification";
     this._baseURL = config.get('plcclr.baseURL');
     this._apiKey = config.get('plcclr.apiKey');
   }
   request(path, data = {}) {
     return [
-      `${this._baseURL}/${path}`, {
+      `${this._baseURL}/certification/${path}`, {
         json: true,
         body: data,
         headers: {
@@ -26,9 +25,9 @@ class Plcclr {
       ...opts,
     });
   }
-  newApplicantEntry(applicant) {
+  newApplicantionEntry(applicant) {
     return this.post(
-      this.request('new', {
+      this.request('newApplicationEntry', {
         ...applicant,
         machineId: 'DDDDD',
         postalCode: 'DDDDD',
@@ -37,14 +36,14 @@ class Plcclr {
       })
     );
   }
-  getApplicantEntry(id) {
+  getApplicantionEntry(id) {
     return this.post(
-      this.request('getRecord', {id})
+      this.request('getApplicationEntry', {id})
     );
   }
   list(filter = {}) {
     return this.post(
-      this.request('list', {
+      this.request('listApplicationEntries', {
         ...filter,
         pgLimit: 20,
       })

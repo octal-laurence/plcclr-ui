@@ -1,8 +1,8 @@
 import React from 'react';
 
+// misc
 import post from './middleware/router';
 
-import Box from '../../box';
 import {
   Table,
   TableHead,

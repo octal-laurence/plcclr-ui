@@ -11,7 +11,9 @@ const handle = app.getRequestHandler();
 
 // Router
 const routes = require('./routes/index')();
-const policeClearanceCertification = require('./routes/post/policeClearanceCertification');
+
+// Remove Soon
+const policeClearanceCertification = require('./routes/model/policeClearanceCertifications');
 
 app.prepare()
 .then(() => {
@@ -22,7 +24,9 @@ app.prepare()
   server.use(cookieParser());
   server.use(express.static(path.join(__dirname, 'public')));
 
+  // Remove Soon
   server.use('/police-clearance-certification', policeClearanceCertification);
+
   server.get('*', (req, res) => {
     const parseUrl = parse(req.url, true);
     const {pathname, query = {}} = parseUrl;
@@ -30,13 +34,13 @@ app.prepare()
 
     if (route) {
       return app.render(req, res, route.page, {
-        ...query
+        ...query,
+        env: process.env.NODE_ENV,
       });
     }
 
     return handle(req, res);
   });
-
 
   server.listen(PORT, (err) => {
     if (err) throw err

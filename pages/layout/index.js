@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Sidebar from '../components/sidebar';
 import Box from '../ui/box'; 
 
-const Layout = ({children, inSidebarNavLink}) => (
+const Layout = ({children}) => (
   <Box 
     className="container-fluid"
     flexDirection="row"

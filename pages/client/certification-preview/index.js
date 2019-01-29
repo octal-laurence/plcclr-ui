@@ -7,6 +7,10 @@ import Wrapper from '../../wrapper';
 import Layout from '../../layout';
 import NavTabs from '../../components/navTabs';
 import Box from '../../ui/box';
+import InputLabel from 'pages/ui/inputLabel';
+import Input from 'pages/ui/input';
+import Button from 'pages/ui/button';
+import ModalBox from 'pages/ui/modal';
 
 import post from '../../../middleware/router';
 import {getApplicationEntry} from 'model/policeClearanceCertifications';
@@ -22,6 +26,10 @@ class CertificationPreview extends React.Component {
         data: {
           applicant: {},
           certification: {},
+          certificate: {
+            verifiedByName: '',
+            verifiedByTitle: ''
+          },
         },
       }
     }
@@ -65,6 +73,7 @@ class CertificationPreview extends React.Component {
     };
 
     this.getApplicantionEntry = this.getApplicantionEntry.bind(this);
+    this.inputHandler = this.inputHandler.bind(this);
   }
   getApplicantionEntry(id) {
     const setApplicantData = ((state = {}) => {
@@ -78,16 +87,15 @@ class CertificationPreview extends React.Component {
 
     setApplicantData({ loading: true });
 
-    // Remove Soon
-    // post(`/police-clearance-certification/getRecord`, {id: `#${id}`})
-
     getApplicationEntry(`#${id}`)
     .then(data => {
       const { applicant, address, ...certification } = data;
+      console.log(certification);
 
       setApplicantData({
         loading: false,
         data: {
+          ...this.state.applicant.data,
           certification,
           applicant: {
             ...applicant,
@@ -104,6 +112,28 @@ class CertificationPreview extends React.Component {
         error: err.message
       });
     });
+  }
+  inputHandler(e) {
+    const {name} = e.target;
+    const value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+
+    const nameComponents = name.split('.');
+    if (nameComponents.length > 1) {
+      if (nameComponents[0] === 'certificate') {
+        this.setState({
+          applicant: {
+            ...this.state.applicant,
+            data: {
+              ...this.state.applicant.data,
+              certificate: {
+                ...this.state.applicant.data.certificate,
+                [nameComponents[1]]: value
+              }
+            }
+          }
+        })
+      }
+    }
   }
   componentDidMount() {
     const {query} = this.props.router;
@@ -134,12 +164,63 @@ class CertificationPreview extends React.Component {
                     .map(([k, v], i) => (
                       <Box key={i}>
                         { v.label } :&nbsp;
-                        <label><u>{ applicant.data.certification[k] || null }</u></label>
+                        <label><u>{ applicant.data.certification[k] || '.' }</u></label>
                       </Box>
                     )) 
                   }
                 </Box>
               }
+              <hr />
+              <Box>
+                <Box>
+                  Verified:
+                  <Box withHorizontalPadding="lg" addSideMarginForChildren="sm">
+                    { (this.state.applicant.data.certificate.verifiedByName != '' && this.state.applicant.data.certificate.verifiedByTitle) ?
+                      (<Box>
+                        <p>{ this.state.applicant.data.certificate.verifiedByName }</p>
+                        <p>{ this.state.applicant.data.certificate.verifiedByTitle }</p>
+                       </Box>
+                      ) : (
+                        <label>In-complete</label>
+                      )
+                    }
+                    <ModalBox btnName="Update">
+                      <Box withVerticalPadding="sm" withHorizontalPadding="md">
+                        <InputLabel>
+                          Name: 
+                          <Input
+                            name="certificate.verifiedByName"
+                            value={this.state.applicant.data.certificate.verifiedByName}
+                            onChange={this.inputHandler}
+                            width="60%"
+                          />
+                        </InputLabel>
+                        <InputLabel>
+                          Title:  
+                          <Input
+                            name="certificate.verifiedByTitle"
+                            value={this.state.applicant.data.certificate.verifiedByTitle}
+                            onChange={this.inputHandler}
+                            width="60%"
+                          />
+                        </InputLabel>
+                        <Button>OK</Button>
+                      </Box>
+                    </ModalBox>
+                  </Box>
+                </Box><br />
+                <Box>
+                  Certified:
+                  <Box withHorizontalPadding="lg" addSideMarginForChildren="sm">
+                    <label>In-complete</label>
+                    <Box>
+                      Name: Laurence P. Geroy
+                    </Box>
+                    <br />
+                    <Button type="button">Update</Button>
+                  </Box>
+                </Box>
+              </Box>
             </Box>
             <Box>
               <h4 align="center">Applicant</h4>

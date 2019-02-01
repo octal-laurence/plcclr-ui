@@ -6,7 +6,6 @@ export default (path, data = {}) => {
       headers: { 'Content-Type': 'application/json', },
     })
     .then(response => {
-      console.log(response);
       if (response.status === 200) {
         return response;
       } else {
@@ -19,7 +18,6 @@ export default (path, data = {}) => {
       resolve(data);
     })
     .catch(err => {
-      console.log(err);
       reject(err)
     });
   });

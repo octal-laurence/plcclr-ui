@@ -61,6 +61,7 @@ class IDPhoto extends React.Component {
   }
   render() {
     const supreme = this.supreme;
+    console.log(supreme.state.applicantIDPhoto.blob);
 
     return (
       <Box withVerticalPadding="md">

@@ -18,11 +18,13 @@ import ApplicantInfoSummary from './summary';
 
 // misc
 import post from '../../../middleware/router';
-import {newApplicantionEntry} from 'model/policeClearanceCertifications';
+import {newApplicantionEntry, editApplicantionEntry, getApplicationEntry} from 'model/policeClearanceCertifications';
 
 class CertificationForm extends React.Component {
   constructor(props) {
     super(props);
+    const id = props.router.query[`id`];
+    const addMode = typeof id === 'undefined';
 
     this.navTabs = [{
       tab: 'applicantInfo',
@@ -42,6 +44,7 @@ class CertificationForm extends React.Component {
     }];
 
     this.state = {
+      addMode,
       editing: {
         status: '',
         error: '',
@@ -58,19 +61,19 @@ class CertificationForm extends React.Component {
         city: '',
         province: '',
         gender: '',
-        civilStatus: '',
         dateBirth: '',
         birthPlace: '',
+        citizenship: '',
         religion: '',
+        civilStatus: '',
         height: '',
         weight: '',
         occupation: '',
-        citizenship: '',
         contactNumber: '',
         purpose: '',
         certResidency: '',
         certResidencyIssuedAt: '',
-        ctcIssuedDate: '',
+        ctcIssuedDate: ''
       },
       applicantIDPhoto: {
         blob: '',
@@ -86,42 +89,13 @@ class CertificationForm extends React.Component {
         json[elem.tab] = 0;
         return json;
       }, {})
-
-      // TESTING ONLY, REMOVE-SOON
-      ,
-      ...{
-          applicantInfo: {
-          firstName: 'ACE',
-          lastName: 'ACE',
-          middleName: 'ACE',
-          suffix: 'ACE',
-          address1: 'ACE',
-          address2: 'ACE',
-          barangay: 'ACE',
-          city: 'ACE',
-          province: 'ACE',
-          gender: 'ACE',
-          civilStatus: 'ACE',
-          dateBirth: '09-09-1992',
-          birthPlace: 'ace',
-          religion: 'ace',
-          height: '5,7',
-          weight: '200',
-          occupation: 'ACE',
-          citizenship: 'ACE',
-          contactNumber: 'ACE',
-          purpose: 'ACE',
-          certResidency: 'ACE',
-          certResidencyIssuedAt: 'ACE',
-          ctcIssuedDate: '09-09-1992',
-        }
-      }
     };
 
     this.renderNavTabs = this.renderNavTabs.bind(this);
     this.applicantInfoInputHandler = this.applicantInfoInputHandler.bind(this);
     this.switchTabHandler = this.switchPageHandler.bind(this);
     this.submitApplicantEntry = this.submitApplicantEntry.bind(this);
+    this.getApplicationEntry = this.getApplicationEntry.bind(this);
   }
   applicantInfoInputHandler(field, value) {
     this.setState({
@@ -161,7 +135,6 @@ class CertificationForm extends React.Component {
     }
   }
   submitApplicantEntry() {
-    this.setState({ editing: { ...this.state.editing, loading: true } })
     const applicantData = {
       ...this.state.applicantInfo,
       applicantIDPhoto: this.state.applicantIDPhoto.blob,
@@ -178,23 +151,19 @@ class CertificationForm extends React.Component {
         return fingerPrints
       })(this.state.applicantFingerPrint),
       applicantSignature: this.state.applicantSignature.blob
-    }
+    };
 
-    // Remove Soon
-    /*`
-    post(`/police-clearance-certification/new`, applicantData)
-    .then(([{certification}]) => {
-      alert('Save Success');
-      const [, rid] = certification['@rid'].split('#');
-      window.location.href = `/certification-preview?id=${rid}`;
-    })
-    .catch(err => {
-      alert(err.message);
-      this.setState({ editing: { ...this.state.editing, loading: false, error: err.message } });
-    });
-    `*/
+    const certification = (this.state.addMode) ? {
+      action: newApplicantionEntry,
+      input: applicantData,
+    } : {
+      action: editApplicantionEntry,
+      input: {...applicantData, id: this.props.router.query.id}
+    };
+    const {input, action} = certification;
 
-    newApplicantionEntry(applicantData)
+    this.setState({ editing: { ...this.state.editing, loading: true } });
+    action(input)
     .then(result => {
       alert('Save Success');
       window.location.href = `/certification-entries`;
@@ -204,9 +173,60 @@ class CertificationForm extends React.Component {
       this.setState({ editing: { ...this.state.editing, loading: false, error: err.message } });
     });
   }
+  getApplicationEntry() {
+    this.setState({
+      editing: {
+        ...this.state.editing,
+        loading: true
+      }
+    });
+
+    getApplicationEntry(`#${this.props.router.query[`id`]}`)
+    .then(data => {
+      const { applicant, address, ...certification } = data;
+
+      this.setState({
+        editing: {
+          ...this.state.editing,
+          loading: false
+        },
+        applicantInfo: {
+          ...Object.entries(this.state.applicantInfo)
+           .map(([k, v]) => k)
+           .reduce((obj, k) => ({
+            ...obj,
+            [k]: applicant[k]
+           }), {}),
+          purpose: certification.purpose
+        },
+        applicantIDPhoto: {
+          blob: applicant.applicantIDPhoto
+        },
+        applicantFingerPrint: {
+          leftThumb: `data:image/jpeg;base64,${applicant.applicantFingerPrints.leftThumb}`,
+          rightThumb: `data:image/jpeg;base64,${applicant.applicantFingerPrints.rightThumb}`
+        },
+        applicantSignature: {
+          blob: applicant.applicantSignature,
+        }
+      });
+    })
+    .catch(err => {
+      this.setState({
+        editing: {
+          ...this.state.editing,
+          loading: false,
+          error: err.message
+        }
+      });
+    });
+  }
   componentDidMount() {
-    console.log(window);
     this.setState({ navTabs: { ...this.state.navTabs, applicantInfo: 1 } });
+
+    if (!this.state.addMode) {
+      this.getApplicationEntry();
+    } 
   }
   renderNavTabs() {
     return (

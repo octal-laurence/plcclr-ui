@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 // UI
 import Button from './button';
+import Box from './box';
 
 const ModalContainer = styled.div`
   position: fixed;
@@ -52,6 +53,7 @@ class ModalBox extends React.Component {
                 <div width="100%">
                   <span>
                     <button
+                      width="5%"
                       type="button"
                       onClick={() => {
                         this.setState({
@@ -65,6 +67,27 @@ class ModalBox extends React.Component {
                 </div>
                 <hr />
                 { this.props.children }
+                <Box withVerticalPadding="sm" withHorizontalPadding="md">
+                  <Button
+                    id="submit"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      this.props.submit()
+                      .then(result => {
+                        this.setState({
+                          show: false,
+                        });
+                      })
+                      .catch(e => {
+                        this.setState({
+                          show: false,
+                        });
+                      });
+                    }}
+                  >
+                    OK              
+                  </Button>
+                </Box>
               </ModalMain>
             </ModalContainer>
           )

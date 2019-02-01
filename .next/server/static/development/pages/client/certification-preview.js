@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,8 +112,6 @@ __webpack_require__.r(__webpack_exports__);
         'Content-Type': 'application/json'
       }
     }).then(function (response) {
-      console.log(response);
-
       if (response.status === 200) {
         return response;
       } else {
@@ -126,7 +124,6 @@ __webpack_require__.r(__webpack_exports__);
       var data = _ref.data;
       resolve(data);
     }).catch(function (err) {
-      console.log(err);
       reject(err);
     });
   });
@@ -138,20 +135,33 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************!*\
   !*** ./model/policeClearanceCertifications.js ***!
   \************************************************/
-/*! exports provided: newApplicantionEntry, listCertificationEntries, getApplicationEntry */
+/*! exports provided: newApplicationEntry, editApplicationEntry, deleteApplicationEntry, listCertificationEntries, getApplicationEntry, grantCertification */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newApplicantionEntry", function() { return newApplicantionEntry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newApplicationEntry", function() { return newApplicationEntry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editApplicationEntry", function() { return editApplicationEntry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteApplicationEntry", function() { return deleteApplicationEntry; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "listCertificationEntries", function() { return listCertificationEntries; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getApplicationEntry", function() { return getApplicationEntry; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grantCertification", function() { return grantCertification; });
 /* harmony import */ var _middleware_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../middleware/router */ "./middleware/router.js");
 
 var action = 'police-clearance-certification';
 
-function newApplicantionEntry(applicant) {
+function newApplicationEntry(applicant) {
   return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/new"), applicant);
+}
+
+function editApplicationEntry(applicant) {
+  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/edit-application-entry"), applicant);
+}
+
+function deleteApplicationEntry(id) {
+  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/delete-application-entry"), {
+    id: id
+  });
 }
 
 function listCertificationEntries() {
@@ -161,6 +171,12 @@ function listCertificationEntries() {
 
 function getApplicationEntry(id) {
   return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/get-application-entry"), {
+    id: id
+  });
+}
+
+function grantCertification(id) {
+  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/grant-certification"), {
     id: id
   });
 }
@@ -262,12 +278,14 @@ function (_React$Component) {
         loading: false,
         data: {
           applicant: {},
+          address: {},
           certification: {},
           certificate: {
             verifiedByName: '',
             verifiedByTitle: ''
           }
-        }
+        },
+        delete: false
       }
     };
     _this.navTabs = [{
@@ -347,36 +365,38 @@ function (_React$Component) {
         label: 'weight'
       }
     };
-    _this.getApplicantionEntry = _this.getApplicantionEntry.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.getApplicationEntry = _this.getApplicationEntry.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.deleteApplicationEntry = _this.deleteApplicationEntry.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.grantCertification = _this.grantCertification.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     _this.inputHandler = _this.inputHandler.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+
+    _this.setApplicantData = function () {
+      var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      _this.setState({
+        applicant: _objectSpread({}, _this.state.applicant, state)
+      });
+    };
+
     return _this;
   }
 
   _createClass(CertificationPreview, [{
-    key: "getApplicantionEntry",
-    value: function getApplicantionEntry(id) {
+    key: "getApplicationEntry",
+    value: function getApplicationEntry(id) {
       var _this2 = this;
 
-      var setApplicantData = function setApplicantData() {
-        var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
-        _this2.setState({
-          applicant: _objectSpread({}, _this2.state.applicant, state)
-        }, function (state) {
-          return console.log(_this2.state.applicant);
-        });
-      };
-
-      setApplicantData({
-        loading: true
+      this.setApplicantData({
+        loading: true,
+        error: ''
       });
+
       Object(_model_policeClearanceCertifications__WEBPACK_IMPORTED_MODULE_13__["getApplicationEntry"])("#".concat(id)).then(function (data) {
         var applicant = data.applicant,
             address = data.address,
             certification = _objectWithoutProperties(data, ["applicant", "address"]);
 
-        console.log(certification);
-        setApplicantData({
+        _this2.setApplicantData({
           loading: false,
           data: _objectSpread({}, _this2.state.applicant.data, {
             certification: certification,
@@ -393,7 +413,58 @@ function (_React$Component) {
           })
         });
       }).catch(function (err) {
-        setApplicantData({
+        _this2.setApplicantData({
+          loading: false,
+          error: err.message
+        });
+      });
+    }
+  }, {
+    key: "deleteApplicationEntry",
+    value: function deleteApplicationEntry(id) {
+      var _this3 = this;
+
+      this.setApplicantData({
+        loading: true,
+        delete: true,
+        error: ''
+      });
+
+      Object(_model_policeClearanceCertifications__WEBPACK_IMPORTED_MODULE_13__["deleteApplicationEntry"])("#".concat(id)).then(function (result) {
+        _this3.setApplicantData({
+          loading: false,
+          delete: false
+        });
+
+        alert('Save Success');
+        window.location.href = "/certification-entries";
+      }).catch(function (err) {
+        _this3.setApplicantData({
+          loading: false,
+          delete: false,
+          error: err.message
+        });
+      });
+    }
+  }, {
+    key: "grantCertification",
+    value: function grantCertification(id) {
+      var _this4 = this;
+
+      this.setApplicantData({
+        loading: true,
+        error: ''
+      });
+
+      Object(_model_policeClearanceCertifications__WEBPACK_IMPORTED_MODULE_13__["grantCertification"])("#".concat(id)).then(function (result) {
+        _this4.setApplicantData({
+          loading: false
+        });
+
+        alert('Certificate Granted');
+        window.location.href = "/certificate";
+      }).catch(function (err) {
+        _this4.setApplicantData({
           loading: false,
           error: err.message
         });
@@ -422,13 +493,30 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       var query = this.props.router.query;
-      this.getApplicantionEntry(query.id);
+      this.getApplicationEntry(query.id);
     }
   }, {
     key: "render",
     value: function render() {
+      var _this5 = this;
+
       var applicant = this.state.applicant;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Certification Preview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      var query = this.props.router.query;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Certification Preview"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), applicant.loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Loading..."), !applicant.loading && !applicant.error && applicant.data.applicant && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        addSideMarginForChildren: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_10__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "/certification-form?id=".concat(applicant.data.certification["@rid"])
+      }, "Edit")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_10__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        href: "#",
+        onClick: function onClick(e) {
+          e.preventDefault();
+          var confirmDelete = confirm("Confirm Delete Record ".concat(applicant.data.certification["@rid"]));
+
+          if (confirmDelete) {
+            _this5.deleteApplicationEntry(applicant.data.certification["@rid"]);
+          }
+        }
+      }, "Delete"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         align: "center"
       }, "Clearance"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), applicant.loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, Object.entries(this.certificationInfo).map(function (_ref2, i) {
         var _ref3 = _slicedToArray(_ref2, 2),
@@ -441,8 +529,13 @@ function (_React$Component) {
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Verified:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
         withHorizontalPadding: "lg",
         addSideMarginForChildren: "sm"
-      }, this.state.applicant.data.certificate.verifiedByName != '' && this.state.applicant.data.certificate.verifiedByTitle ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.applicant.data.certificate.verifiedByName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, this.state.applicant.data.certificate.verifiedByTitle)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "In-complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_modal__WEBPACK_IMPORTED_MODULE_11__["default"], {
-        btnName: "Update"
+      }, applicant.data.certificate.verifiedByName != '' && applicant.data.certificate.verifiedByTitle ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, applicant.data.certificate.verifiedByName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, applicant.data.certificate.verifiedByTitle)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "In-complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_modal__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        btnName: "Update",
+        submit: function submit() {
+          return new Promise(function (resolve, reject) {
+            resolve('success');
+          });
+        }
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
         withVerticalPadding: "sm",
         withHorizontalPadding: "md"
@@ -456,12 +549,30 @@ function (_React$Component) {
         value: this.state.applicant.data.certificate.verifiedByTitle,
         onChange: this.inputHandler,
         width: "60%"
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_10__["default"], null, "OK"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Certified:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+      })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Certified:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
         withHorizontalPadding: "lg",
         addSideMarginForChildren: "sm"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "In-complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Name: Laurence P. Geroy"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_10__["default"], {
-        type: "button"
-      }, "Update"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      }, applicant.data.certificate.certifiedByName != '' && applicant.data.certificate.certifiedByTitle ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, applicant.data.certificate.certifiedByName), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, applicant.data.certificate.certifiedByTitle)) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "In-complete"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_modal__WEBPACK_IMPORTED_MODULE_11__["default"], {
+        btnName: "Update",
+        submit: function submit() {
+          return new Promise(function (resolve, reject) {
+            resolve('success');
+          });
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        withVerticalPadding: "sm",
+        withHorizontalPadding: "md"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "Name:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        name: "certificate.certifiedByName",
+        value: this.state.applicant.data.certificate.certifiedByName,
+        onChange: this.inputHandler,
+        width: "60%"
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "Title:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_input__WEBPACK_IMPORTED_MODULE_9__["default"], {
+        name: "certificate.certifiedByTitle",
+        value: this.state.applicant.data.certificate.certifiedByTitle,
+        onChange: this.inputHandler,
+        width: "60%"
+      })))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
         align: "center"
       }, "Applicant"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), applicant.loading ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Loading...") : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, Object.entries(this.applicantInfo).map(function (_ref4) {
         var _ref5 = _slicedToArray(_ref4, 2),
@@ -543,9 +654,18 @@ function (_React$Component) {
           display: 'block',
           width: '100%',
           height: 'auto',
-          'border-bottom': '2px groove'
+          'borderBottom': '2px groove'
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Signature"))))))))));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Signature"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        align: "center",
+        withVerticalPadding: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_10__["default"], {
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this5.grantCertification(applicant.data.certification["@rid"]);
+        }
+      }, "Grant Certification"))), applicant.error && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, applicant.error)));
     }
   }]);
 
@@ -1336,6 +1456,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
 /* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _button__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./button */ "./pages/ui/button.js");
+/* harmony import */ var _box__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./box */ "./pages/ui/box.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -1356,6 +1477,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
  // UI
+
 
 
 var ModalContainer = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.div.withConfig({
@@ -1402,13 +1524,32 @@ function (_React$Component) {
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(ModalMain, null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         width: "100%"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("span", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        width: "5%",
         type: "button",
         onClick: function onClick() {
           _this2.setState({
             show: false
           });
         }
-      }, "x"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), this.props.children)));
+      }, "x"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), this.props.children, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_box__WEBPACK_IMPORTED_MODULE_3__["default"], {
+        withVerticalPadding: "sm",
+        withHorizontalPadding: "md"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_button__WEBPACK_IMPORTED_MODULE_2__["default"], {
+        id: "submit",
+        onClick: function onClick(e) {
+          e.preventDefault();
+
+          _this2.props.submit().then(function (result) {
+            _this2.setState({
+              show: false
+            });
+          }).catch(function (e) {
+            _this2.setState({
+              show: false
+            });
+          });
+        }
+      }, "OK")))));
     }
   }]);
 
@@ -1527,6 +1668,9 @@ module.exports = function () {
     '/certification-preview': {
       page: '/client/certification-preview'
     },
+    '/certificate': {
+      page: '/client/certificate'
+    },
     '/404': {
       page: '/404'
     },
@@ -1538,7 +1682,7 @@ module.exports = function () {
 
 /***/ }),
 
-/***/ 6:
+/***/ 3:
 /*!***********************************************************!*\
   !*** multi ./pages/client/certification-preview/index.js ***!
   \***********************************************************/

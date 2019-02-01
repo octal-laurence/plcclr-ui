@@ -14,6 +14,9 @@ module.exports = () => {
     '/certification-preview': {
       page: '/client/certification-preview'
     },
+    '/certificate': {
+      page: '/client/certificate'
+    },
     '/404': {
       page: '/404',
     },

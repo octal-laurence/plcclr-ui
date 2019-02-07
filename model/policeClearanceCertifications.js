@@ -22,8 +22,12 @@ function getApplicationEntry(id) {
   return router(`/${action}/get-application-entry`, {id})
 }
 
-function grantCertification(id) {
-  return router(`/${action}/grant-certification`, {id});
+function grantCertification(application) {
+  return router(`/${action}/grant-certification`, application);
+}
+
+function getCertificate(id) {
+  return router(`/post-test`, {id}); 
 }
 
 export {
@@ -33,4 +37,5 @@ export {
   listCertificationEntries,
   getApplicationEntry,
   grantCertification,
+  getCertificate,
 }

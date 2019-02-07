@@ -1,7 +1,7 @@
 module.exports =
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
-/******/ 	var installedModules = require('../../../../ssr-module-cache.js');
+/******/ 	var installedModules = require('../../../../../ssr-module-cache.js');
 /******/
 /******/ 	// The require function
 /******/ 	function __webpack_require__(moduleId) {
@@ -88,111 +88,14 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./middleware/router.js":
-/*!******************************!*\
-  !*** ./middleware/router.js ***!
-  \******************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (function (path) {
-  var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-  return new Promise(function (resolve, reject) {
-    fetch(path, {
-      body: JSON.stringify(data),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    }).then(function (response) {
-      if (response.status === 200) {
-        return response;
-      } else {
-        var errorServer = new Error("Server Error");
-        reject(errorServer);
-      }
-    }).then(function (response) {
-      return response.json();
-    }).then(function (_ref) {
-      var data = _ref.data;
-      resolve(data);
-    }).catch(function (err) {
-      reject(err);
-    });
-  });
-});
-
-/***/ }),
-
-/***/ "./model/policeClearanceCertifications.js":
-/*!************************************************!*\
-  !*** ./model/policeClearanceCertifications.js ***!
-  \************************************************/
-/*! exports provided: newApplicationEntry, editApplicationEntry, deleteApplicationEntry, listCertificationEntries, getApplicationEntry, grantCertification, getCertificate */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "newApplicationEntry", function() { return newApplicationEntry; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "editApplicationEntry", function() { return editApplicationEntry; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteApplicationEntry", function() { return deleteApplicationEntry; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "listCertificationEntries", function() { return listCertificationEntries; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getApplicationEntry", function() { return getApplicationEntry; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "grantCertification", function() { return grantCertification; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getCertificate", function() { return getCertificate; });
-/* harmony import */ var _middleware_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../middleware/router */ "./middleware/router.js");
-
-var action = 'police-clearance-certification';
-
-function newApplicationEntry(applicant) {
-  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/new"), applicant);
-}
-
-function editApplicationEntry(applicant) {
-  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/edit-application-entry"), applicant);
-}
-
-function deleteApplicationEntry(id) {
-  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/delete-application-entry"), {
-    id: id
-  });
-}
-
-function listCertificationEntries() {
-  var filter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/list-entries"), filter);
-}
-
-function getApplicationEntry(id) {
-  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/get-application-entry"), {
-    id: id
-  });
-}
-
-function grantCertification(application) {
-  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/grant-certification"), application);
-}
-
-function getCertificate(id) {
-  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/post-test", {
-    id: id
-  });
-}
-
-
-
-/***/ }),
-
-/***/ "./pages/client/certificate/index.js":
+/***/ "./pages/client/certificate/print.js":
 /*!*******************************************!*\
-  !*** ./pages/client/certificate/index.js ***!
+  !*** ./pages/client/certificate/print.js ***!
   \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -205,23 +108,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_dom__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react_dom__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../wrapper */ "./pages/wrapper/index.js");
-/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../layout */ "./pages/layout/index.js");
-/* harmony import */ var _ui_box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ui/box */ "./pages/ui/box.js");
-/* harmony import */ var _ui_inputLabel__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../ui/inputLabel */ "./pages/ui/inputLabel.js");
-/* harmony import */ var _ui_input__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../ui/input */ "./pages/ui/input.js");
-/* harmony import */ var _ui_button__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../ui/button */ "./pages/ui/button.js");
-/* harmony import */ var _model_policeClearanceCertifications__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../../model/policeClearanceCertifications */ "./model/policeClearanceCertifications.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! moment */ "moment");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../wrapper */ "./pages/wrapper/index.js");
+/* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../layout */ "./pages/layout/index.js");
+/* harmony import */ var _components_navTabs__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/navTabs */ "./pages/components/navTabs.js");
+/* harmony import */ var _ui_box__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../ui/box */ "./pages/ui/box.js");
+/* harmony import */ var _ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../ui/inputLabel */ "./pages/ui/inputLabel.js");
+/* harmony import */ var _ui_input__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../ui/input */ "./pages/ui/input.js");
 /* harmony import */ var _testData__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./testData */ "./pages/client/certificate/testData.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -251,243 +147,133 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
-var Certificate =
+var Print =
 /*#__PURE__*/
 function (_React$Component) {
-  _inherits(Certificate, _React$Component);
+  _inherits(Print, _React$Component);
 
-  function Certificate(props) {
+  function Print(props) {
     var _this;
 
-    _classCallCheck(this, Certificate);
+    _classCallCheck(this, Print);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(Certificate).call(this, props));
-    _this.certificateId = props.router.query.id;
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Print).call(this, props));
     _this.state = {
-      loading: false,
+      loading: true,
       error: '',
       data: Object(_testData__WEBPACK_IMPORTED_MODULE_10__["default"])()
-    };
-    _this.certificationInfo = {
-      machineId: {
-        label: 'machine#'
-      },
-      station: {
-        label: 'station'
-      },
-      stationName: {
-        label: 'station name '
-      },
-      dateCreated: {
-        label: 'date file'
-      },
-      dateUpdated: {
-        label: 'date update'
-      },
-      purpose: {
-        label: 'purpose'
-      },
-      remarks: {
-        label: 'remarks'
-      },
-      status: {
-        label: 'status'
-      }
-    };
-    _this.applicantInfo = {
-      firstName: {
-        label: 'first name'
-      },
-      lastName: {
-        label: 'last name'
-      },
-      middleName: {
-        label: 'middle name'
-      },
-      suffix: {
-        label: 'suffix'
-      },
-      address: {
-        label: 'address'
-      },
-      gender: {
-        label: 'gender'
-      },
-      civilStatus: {
-        label: 'civil status'
-      },
-      citizenship: {
-        label: 'citizenship'
-      },
-      dateBirth: {
-        label: 'birth date'
-      },
-      birthPlace: {
-        label: 'birth place'
-      },
-      height: {
-        label: 'height'
-      },
-      weight: {
-        label: 'weight'
-      }
     };
     return _this;
   }
 
-  _createClass(Certificate, [{
-    key: "getCertificate",
-    value: function getCertificate() {
-      var _this2 = this;
-
-      this.setState({
-        loading: true,
-        error: ''
-      });
-
-      Object(_model_policeClearanceCertifications__WEBPACK_IMPORTED_MODULE_9__["getCertificate"])('ice').then(function (ace) {
-        _this2.setState({
-          loading: false
-        });
-      }).catch(function (err) {
-        _this2.setState({
-          loading: false,
-          error: err.message
-        });
-      });
-    }
-  }, {
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.getCertificate();
+  _createClass(Print, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      window.print();
     }
   }, {
     key: "render",
     value: function render() {
-      var _this3 = this;
-
-      var certificateData = this.state;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "Police Clearance Certificate"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null)), this.state.loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Loading..."), !this.state.loading && !this.state.error && this.state.data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      var certificateData = this.state.data;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        withHorizontalPadding: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
         align: "center"
-      }, "Clearance"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, Object.entries(this.certificationInfo).map(function (_ref, i) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            k = _ref2[0],
-            v = _ref2[1];
-
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          key: i
-        }, v.label, " :\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, _this3.state.data.certificationEntry[k] || '.')));
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Verified:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        withHorizontalPadding: "lg",
-        addSideMarginForChildren: "sm"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, ['name', 'title'].map(function (e) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          key: e
-        }, _this3.state.data.verifiedBy[e]);
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Certified:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        withHorizontalPadding: "lg",
-        addSideMarginForChildren: "sm"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, ['name', 'title'].map(function (e) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", {
-          key: e
-        }, _this3.state.data.certifiedBy[e]);
-      })))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "HEADER LINE1 (Label)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "HEADER LINE2 (Division)"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "HEADER LINE3 (Station)")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        align: "right"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, " Date: ", " ".concat(moment__WEBPACK_IMPORTED_MODULE_3___default()().format('L')), " ")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
         align: "center"
-      }, "Applicant"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, Object.entries(this.applicantInfo).map(function (_ref3) {
-        var _ref4 = _slicedToArray(_ref3, 2),
-            k = _ref4[0],
-            v = _ref4[1];
-
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-          key: "".concat(k)
-        }, v.label, " :\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("u", null, _this3.state.data.applicant[k] || null)));
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h4", {
-        align: "center"
-      }, "Identification"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        height: "400px",
-        borderStyle: "groove",
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("h3", null, "POLICE CLEARANCE")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        width: "70%"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("p", null, "Sample text, Sample text, Sample text, Sample text, Sample text, Sample text, Sample text, Sample text Sample text, Sample text, Sample text, Sample text, Sample text, Sample text, Sample text, Sample text"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
         flexDirection: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        width: "70%",
+        withHorizontalPadding: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "NAME:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, [certificateData.applicant.firstName, certificateData.applicant.middleName, certificateData.applicant.lastName, certificateData.applicant.suffix].join(' '))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "ADDRESS:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, [certificateData.applicant.address1, certificateData.applicant.address2, certificateData.applicant.barangay, certificateData.applicant.city, certificateData.applicant.province, certificateData.applicant.postalCode])), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "BIRTH DATE:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, certificateData.applicant.dateBirth)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "PLACE OF BIRTH:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, certificateData.applicant.birthPlace)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "Findings:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, certificateData.findings)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "Purpose:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, certificateData.certificationEntry.purpose)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "Validity:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, certificateData.validity)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, "CTC Date Issued:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, certificateData.applicant.ctcIssuedDate))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        width: "30%",
+        withHorizontalPadding: "sm"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, "Identification:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        height: "150px",
+        width: "100%",
+        flexDirection: "row"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
         width: "50%",
-        height: "100%",
-        position: "relative"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        justifyMe: true,
-        width: "400px"
+        align: "center"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.state.data.applicant.applicantIDPhoto && this.state.data.applicant.applicantIDPhoto,
+        src: certificateData.applicant.applicantIDPhoto,
         style: {
           display: 'block',
-          width: '100%',
+          width: '80%',
           height: 'auto',
           borderStyle: 'groove'
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
         align: "center"
-      }, "ID Picture"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      }, "ID Picture")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
         width: "50%",
-        height: "100%",
-        position: "relative"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        justifyMe: true,
-        width: "300px"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        width: "100%",
-        height: "150px",
         align: "center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        flexDirection: "row"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        className: "leftThumb",
-        borderStyle: "groove",
-        height: "150px",
-        width: "50%"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Left Thumb"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.state.data.applicant.applicantFingerPrints && "data:image/png;base64,".concat(this.state.data.applicant.applicantFingerPrints.leftThumb),
-        style: {
-          display: 'block',
-          width: 'auto',
-          height: '80%'
-        }
-      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        className: "rightThumb",
-        borderStyle: "groove",
-        height: "150px",
-        width: "50%"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Right Thumb"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.state.data.applicant.applicantFingerPrints && "data:image/png;base64,".concat(this.state.data.applicant.applicantFingerPrints.rightThumb),
-        style: {
-          display: 'block',
-          width: 'auto',
-          height: '80%'
-        }
-      })))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        width: "100%",
-        height: "150px",
-        align: "center"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        width: "200px"
       }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
-        src: this.state.data.applicant.applicantSignature && this.state.data.applicant.applicantSignature,
+        src: "data:image/png;base64,".concat(certificateData.applicant.applicantFingerPrints.rightThumb),
         style: {
           display: 'block',
-          width: '100%',
+          width: '55%',
+          height: 'auto',
+          borderStyle: 'groove'
+        }
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        align: "center"
+      }, "Right Thumb"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        align: "center"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("img", {
+        src: certificateData.applicant.applicantSignature,
+        style: {
+          display: 'block',
+          width: '50%',
           height: 'auto',
           'borderBottom': '2px groove'
         }
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Signature"))))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        align: "center",
-        withVerticalPadding: "lg"
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_button__WEBPACK_IMPORTED_MODULE_8__["default"], null, "Print"))), this.state.error && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, this.state.error)));
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], null, "Signature"))))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        flexDirection: "row",
+        addSideMarginForChildren: "lg"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        width: "25%"
+      }, "Verified By:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, certificateData.verifiedBy.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, certificateData.verifiedBy.title)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        width: "25%"
+      }, "Certified By:", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_inputLabel__WEBPACK_IMPORTED_MODULE_8__["default"], null, certificateData.certifiedBy.name), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("hr", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("label", null, certificateData.certifiedBy.title))));
     }
   }]);
 
-  return Certificate;
+  return Print;
 }(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
-var InjectedRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Certificate);
+var InjectedRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_2__["withRouter"])(Print);
 /* harmony default export */ __webpack_exports__["default"] = (function () {
-  return Object(_wrapper__WEBPACK_IMPORTED_MODULE_3__["default"])(InjectedRouter);
+  return Object(_wrapper__WEBPACK_IMPORTED_MODULE_4__["default"])(InjectedRouter);
 });
 
 /***/ }),
@@ -753,6 +539,84 @@ var Alink = styled_components__WEBPACK_IMPORTED_MODULE_1___default.a.a.withConfi
 
 /***/ }),
 
+/***/ "./pages/components/navTabs.js":
+/*!*************************************!*\
+  !*** ./pages/components/navTabs.js ***!
+  \*************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var NavTabs =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(NavTabs, _React$Component);
+
+  function NavTabs(props) {
+    _classCallCheck(this, NavTabs);
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(NavTabs).call(this, props));
+  }
+
+  _createClass(NavTabs, [{
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("ul", {
+        className: "nav nav-tabs"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link active",
+        href: "#"
+      }, "Active")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "#"
+      }, "Link")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link",
+        href: "#"
+      }, "Link")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("li", {
+        className: "nav-item"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+        className: "nav-link disabled",
+        href: "#"
+      }, "Disabled")));
+    }
+  }]);
+
+  return NavTabs;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (NavTabs);
+
+/***/ }),
+
 /***/ "./pages/components/sidebar.js":
 /*!*************************************!*\
   !*** ./pages/components/sidebar.js ***!
@@ -966,67 +830,6 @@ var Box = styled_components__WEBPACK_IMPORTED_MODULE_1___default()(function (_re
   return p.addSideMarginForChildren && "\n    > * {\n      &:not(:last-child) {\n        margin-right: ".concat(p.addSideMarginForChildren, ";\n      }\n    }\n  ");
 });
 /* harmony default export */ __webpack_exports__["default"] = (Box);
-
-/***/ }),
-
-/***/ "./pages/ui/button.js":
-/*!****************************!*\
-  !*** ./pages/ui/button.js ***!
-  \****************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! styled-components */ "styled-components");
-/* harmony import */ var styled_components__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(styled_components__WEBPACK_IMPORTED_MODULE_1__);
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
-
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
-
-
-
-var Button = styled_components__WEBPACK_IMPORTED_MODULE_1___default()(function (_ref) {
-  var active = _ref.active,
-      block = _ref.block,
-      centered = _ref.centered,
-      display = _ref.display,
-      margin = _ref.margin,
-      otherProps = _objectWithoutProperties(_ref, ["active", "block", "centered", "display", "margin"]);
-
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", otherProps);
-}).attrs({
-  display: function display(props) {
-    return props.block ? 'block' : 'inline-block';
-  },
-  margin: function margin(props) {
-    return props.centered ? '0 auto' : 'initial';
-  }
-}).withConfig({
-  displayName: "button__Button",
-  componentId: "obiwv6-0"
-})(["align-self:flex-start;background-color:", ";border:none;border-radius:", ";color:", ";display:", ";outline:none;margin:", ";padding:", " ", ";text-transform:uppercase;&:active,&:disabled{background-color:", ";}&:not(:last-child){margin-bottom:", "}&:hover{cursor:pointer;}"], function (props) {
-  return props.active ? props.theme.colors.primaryDark : props.theme.colors.primary;
-}, function (props) {
-  return props.theme.misc.borderRadius;
-}, function (props) {
-  return props.theme.colors.white;
-}, function (props) {
-  return props.display;
-}, function (props) {
-  return props.margin;
-}, function (props) {
-  return props.theme.padding.sm;
-}, function (props) {
-  return props.theme.padding.md;
-}, function (props) {
-  return props.theme.colors.primaryLight;
-}, function (props) {
-  return props.theme.padding.sm;
-});
-/* harmony default export */ __webpack_exports__["default"] = (Button);
 
 /***/ }),
 
@@ -1378,15 +1181,26 @@ module.exports = function () {
 
 /***/ }),
 
-/***/ 3:
+/***/ 4:
 /*!*************************************************!*\
-  !*** multi ./pages/client/certificate/index.js ***!
+  !*** multi ./pages/client/certificate/print.js ***!
   \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! ./pages/client/certificate/index.js */"./pages/client/certificate/index.js");
+module.exports = __webpack_require__(/*! ./pages/client/certificate/print.js */"./pages/client/certificate/print.js");
 
+
+/***/ }),
+
+/***/ "moment":
+/*!*************************!*\
+  !*** external "moment" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("moment");
 
 /***/ }),
 
@@ -1446,4 +1260,4 @@ module.exports = require("styled-components");
 /***/ })
 
 /******/ });
-//# sourceMappingURL=certificate.js.map
+//# sourceMappingURL=print.js.map

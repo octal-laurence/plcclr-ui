@@ -18,7 +18,7 @@ import ApplicantInfoSummary from './summary';
 
 // misc
 import post from '../../../middleware/router';
-import {newApplicantionEntry, editApplicantionEntry, getApplicationEntry} from 'model/policeClearanceCertifications';
+import {newApplicationEntry, editApplicationEntry, getApplicationEntry} from 'model/policeClearanceCertifications';
 
 class CertificationForm extends React.Component {
   constructor(props) {
@@ -154,10 +154,10 @@ class CertificationForm extends React.Component {
     };
 
     const certification = (this.state.addMode) ? {
-      action: newApplicantionEntry,
+      action: newApplicationEntry,
       input: applicantData,
     } : {
-      action: editApplicantionEntry,
+      action: editApplicationEntry,
       input: {...applicantData, id: this.props.router.query.id}
     };
     const {input, action} = certification;

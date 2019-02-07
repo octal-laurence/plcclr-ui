@@ -41,6 +41,7 @@ const theme = {
     sm: '0.75em',
     md: '2em',
     lg: '3em',
+    xl: '5em',
   },
 };
 

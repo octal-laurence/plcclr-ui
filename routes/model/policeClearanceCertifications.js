@@ -16,21 +16,25 @@ router.post('/edit-application-entry', (req, res, next) => {
   const {body} = req;
   const plcclr = new apiPlcclr();
 
-  res.status(200).json({ data: [] });
+  plcclr.editApplicationEntry(body)
+  .then(({data}) => res.status(200).json({ data: data }))
+  .catch(err => res.status(500).json({ error: err.message }));
 });
 
 router.post('/delete-application-entry', (req, res, next) => {
   const {body} = req;
   const plcclr = new apiPlcclr();
 
-  res.status(200).json({ data: [] });
+  plcclr.deleteApplicationEntry(body)
+  .then(({data}) => res.status(200).json({ data: data }))
+  .catch(err => res.status(500).json({ error: err.message }));
 });
 
 router.post('/get-application-entry', (req, res, next) => {
   const {body} = req;
   const plcclr = new apiPlcclr();
 
-  plcclr.getApplicantionEntry(body.id)
+  plcclr.getApplicationEntry(body.id)
   .then(({data}) => res.status(200).json({ data: data }))
   .catch(err => res.status(500).json({ error: err.message }));
 });
@@ -48,7 +52,9 @@ router.post('/grant-certification', (req, res, next) => {
   const {body} = req;
   const plcclr = new apiPlcclr();
 
-  res.status(200).json({ data: [] });
+  plcclr.grantCertificate(body)
+  .then(({data}) => res.status(200).json({ data: data }))
+  .catch(err => res.status(500).json({ error: err.message }));
 });
 
 module.exports = router;

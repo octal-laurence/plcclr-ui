@@ -36,9 +36,30 @@ class Plcclr {
       })
     );
   }
-  getApplicantionEntry(id) {
+  editApplicationEntry(applicant) {
+    return this.post(
+      this.request('editApplicationEntry', {
+        ...applicant,
+        machineId: 'DDDDD',
+        postalCode: 'DDDDD',
+        station: 'DDDDD',
+        stationName: 'DDDDD'
+      })
+    );
+  }
+  deleteApplicationEntry(ref) {
+    return this.post(
+      this.request('deleteApplicationEntry', ref)
+    );
+  }
+  getApplicationEntry(id) {
     return this.post(
       this.request('getApplicationEntry', {id})
+    );
+  }
+  grantCertificate(application) {
+    return this.post(
+      this.request('grantCertificate', application)
     );
   }
   list(filter = {}) {

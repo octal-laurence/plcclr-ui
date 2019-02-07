@@ -17,6 +17,9 @@ module.exports = () => {
     '/certificate': {
       page: '/client/certificate'
     },
+    '/certificate-print': {
+      page: '/client/certificate/print'
+    },
     '/404': {
       page: '/404',
     },

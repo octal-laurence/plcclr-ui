@@ -11,8 +11,6 @@ const handle = app.getRequestHandler();
 
 // Router
 const routes = require('./routes/index')();
-
-// Remove Soon
 const policeClearanceCertification = require('./routes/model/policeClearanceCertifications');
 
 app.prepare()
@@ -24,7 +22,6 @@ app.prepare()
   server.use(cookieParser());
   server.use(express.static(path.join(__dirname, 'public')));
 
-  // Remove Soon
   server.use('/police-clearance-certification', policeClearanceCertification);
 
   server.get('*', (req, res) => {
@@ -40,6 +37,9 @@ app.prepare()
     }
 
     return handle(req, res);
+  });
+  server.post('/post-test', (req, res) => {
+    res.status(200).json({data: []});
   });
 
   server.listen(PORT, (err) => {

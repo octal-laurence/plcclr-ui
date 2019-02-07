@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {withRouter} from 'next/router';
-import Head from 'next/head';
 
 import Wrapper from '../../wrapper';
 import Layout from '../../layout';
@@ -12,7 +11,6 @@ import Input from 'pages/ui/input';
 import Button from 'pages/ui/button';
 import ModalBox from 'pages/ui/modal';
 
-import post from '../../../middleware/router';
 import {getApplicationEntry, deleteApplicationEntry, grantCertification} from 'model/policeClearanceCertifications';
 
 class CertificationPreview extends React.Component {
@@ -29,26 +27,15 @@ class CertificationPreview extends React.Component {
           certification: {},
           certificate: {
             verifiedByName: '',
-            verifiedByTitle: ''
+            verifiedByTitle: '',
+            certifiedByName: '',
+            certifiedByTitle: '',
           },
         },
         delete: false,
       }
     }
 
-    this.navTabs = [{
-      tab: 'applicantInfo',
-      label: 'Start',
-    }, {
-      tab: 'applicantIDPhoto',
-      label: 'ID Photo',
-    }, {
-      tab: 'applicantFingerPrint',
-      label: 'Finger Print',
-    }, {
-      tab: 'applicantSignature',
-      label: 'Signature',
-    }]
     this.certificationInfo = {
       machineId: { label: 'machine#' },
       station: { label: 'station' },
@@ -122,21 +109,39 @@ class CertificationPreview extends React.Component {
     .then(result => {
       this.setApplicantData({ loading: false , delete: false});
 
-      alert('Save Success');
+      alert('Record Deleted...');
       window.location.href = `/certification-entries`;
     })
     .catch(err => {
       this.setApplicantData({ loading: false , delete: false, error: err.message });
     });
   }
-  grantCertification(id) {
+  grantCertification() {
+    const certificationData = {
+      plcclrId: `#${this.state.applicant.data.certification['@rid']}`,
+      machineId: this.state.applicant.data.certification.machineId,
+      station: this.state.applicant.data.certification.station,
+      applicantId: `#${this.state.applicant.data.applicant['@rid']}`,
+      findings: 'granted',
+      verifiedBy: {
+        id: 'vbn',
+        name: this.state.applicant.data.certificate.verifiedByName, 
+        title: this.state.applicant.data.certificate.verifiedByTitle 
+      },
+      certifiedBy: {
+        id: 'cbn',
+        name: this.state.applicant.data.certificate.certifiedByName, 
+        title: this.state.applicant.data.certificate.certifiedByTitle
+      }, 
+    }
+
     this.setApplicantData({ loading: true , error: ''});  
-    grantCertification(`#${id}`)
+    grantCertification(certificationData)
     .then(result => {
       this.setApplicantData({ loading: false });
 
       alert('Certificate Granted');
-      window.location.href = `/certificate`;
+      window.location.href = `/certificate?id=${result['@rid'].split('#')[1]}`;
     })
     .catch(err => {
       this.setApplicantData({ loading: false, error: err.message });
@@ -164,7 +169,7 @@ class CertificationPreview extends React.Component {
       }
     }
   }
-  componentDidMount() {
+  componentWillMount() {
     const {query} = this.props.router;
     this.getApplicationEntry(query.id);
   }
@@ -441,7 +446,7 @@ class CertificationPreview extends React.Component {
                 >
                   <Button onClick={(e) => {
                     e.preventDefault();
-                    this.grantCertification(applicant.data.certification[`@rid`]);
+                    this.grantCertification();
                   }}>
                     Grant Certification
                   </Button>

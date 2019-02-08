@@ -22,12 +22,16 @@ function getApplicationEntry(id) {
   return router(`/${action}/get-application-entry`, {id})
 }
 
-function grantCertification(application) {
-  return router(`/${action}/grant-certification`, application);
+function grantCertificate(application) {
+  return router(`/${action}/grant-certificate`, application);
 }
 
 function getCertificate(id) {
-  return router(`/post-test`, {id}); 
+  return router(`/${action}/get-certificate`, {id}); 
+}
+
+function listCertificates(filter = {}) {
+  return router('/post-test', filter);
 }
 
 export {
@@ -36,6 +40,7 @@ export {
   deleteApplicationEntry,
   listCertificationEntries,
   getApplicationEntry,
-  grantCertification,
+  grantCertificate,
   getCertificate,
+  listCertificates,
 }

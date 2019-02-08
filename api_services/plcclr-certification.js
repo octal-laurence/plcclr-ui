@@ -57,17 +57,22 @@ class Plcclr {
       this.request('getApplicationEntry', {id})
     );
   }
-  grantCertificate(application) {
-    return this.post(
-      this.request('grantCertificate', application)
-    );
-  }
-  list(filter = {}) {
+  listApplicationEntry(filter = {}) {
     return this.post(
       this.request('listApplicationEntries', {
         ...filter,
         pgLimit: 20,
       })
+    );
+  }
+  grantCertificate(application) {
+    return this.post(
+      this.request('grantCertificate', application)
+    );
+  }
+  getCertificate(id) {
+    return this.post(
+      this.request('getCertificate', {id})
     );
   }
 }

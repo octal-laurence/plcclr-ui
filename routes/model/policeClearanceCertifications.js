@@ -43,16 +43,25 @@ router.post('/list-entries', (req, res, next) => {
   const {body} = req;
   const plcclr = new apiPlcclr();
 
-  plcclr.list(body)
+  plcclr.listApplicationEntry(body)
   .then(({data}) => res.status(200).json({ data: data }))
   .catch(err => res.status(500).json({ error: err.message }));
 });
 
-router.post('/grant-certification', (req, res, next) => {
+router.post('/grant-certificate', (req, res, next) => {
   const {body} = req;
   const plcclr = new apiPlcclr();
 
   plcclr.grantCertificate(body)
+  .then(({data}) => res.status(200).json({ data: data }))
+  .catch(err => res.status(500).json({ error: err.message }));
+});
+
+router.post('/get-certificate', (req, res, next) => {
+  const {body} = req;
+  const plcclr = new apiPlcclr();
+
+  plcclr.getCertificate(body.id)
   .then(({data}) => res.status(200).json({ data: data }))
   .catch(err => res.status(500).json({ error: err.message }));
 });

@@ -18,6 +18,18 @@
     "/client/certificate/print": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
+    ],
+    "/client/certification-form": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/client/certification-entries": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
+    ],
+    "/client/certificate/list": [
+      "static/runtime/webpack.js",
+      "static/runtime/main.js"
     ]
   }
 }

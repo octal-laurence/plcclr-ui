@@ -24,6 +24,8 @@ const TableBody = styled.tbody`
   width: 100%;
   overflow: auto;
   height: ${p => p.tblHeight};
+  tr:nth-child(even){background-color: #f2f2f2};
+  
 `;
 
 const TableHead = styled.thead`

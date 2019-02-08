@@ -18,7 +18,6 @@ import {
 } from 'pages/ui/library/tableCP/table';
 
 // misc
-import post from '../../../middleware/router';
 import {listCertificationEntries} from 'model/policeClearanceCertifications';
 
 class CertificationEntries extends React.Component {
@@ -95,7 +94,7 @@ class CertificationEntries extends React.Component {
           </TableHead>
           <TableBody tblHeight='650px'>
             { certificationEntries.data.map((data, i) => (
-                <tr key={i}>
+                <tr key={i} width="100%">
                   { dataColumns.map(([accessor, , linkOpt={}]) => {
                     const {link, route} = linkOpt;
                     const tblData = ((input) => {

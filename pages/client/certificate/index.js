@@ -10,7 +10,6 @@ import Input from 'pages/ui/input';
 import Button from 'pages/ui/button';
 
 import {getCertificate} from 'model/policeClearanceCertifications';
-import testData from './testData';
 
 class Certificate extends React.Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class Certificate extends React.Component {
     this.state = {
       loading: false,
       error: '',
-      data: testData()
+      data: {}
     };
 
     this.certificationInfo = {
@@ -50,10 +49,11 @@ class Certificate extends React.Component {
   }
   getCertificate() {
     this.setState({ loading: true, error: '' })
-    getCertificate('ice')
-    .then(ace => {
+    getCertificate(`#${this.certificateId}`)
+    .then(result => {
       this.setState({ 
         loading: false,
+        data: result,
       });
     })
     .catch(err => {
@@ -95,6 +95,12 @@ class Certificate extends React.Component {
                   </Box>
                   <hr />
                   <Box>
+                    <Box>
+                      Findings:
+                      <Box withHorizontalPadding="lg" addSideMarginForChildren="sm">
+                        { this.state.data.findings }
+                      </Box>
+                    </Box><br />
                     <Box>
                       Verified:
                       <Box withHorizontalPadding="lg" addSideMarginForChildren="sm">
@@ -248,7 +254,9 @@ class Certificate extends React.Component {
                   withVerticalPadding="lg"
                 >
                   <Button>
-                    Print
+                    <a href={`/certificate-print?id=${this.state.data[`@rid`]}`} target="_blank">
+                      Print
+                    </a>
                   </Button>
                 </Box>
               </Box>

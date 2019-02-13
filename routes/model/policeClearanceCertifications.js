@@ -66,4 +66,13 @@ router.post('/get-certificate', (req, res, next) => {
   .catch(err => res.status(500).json({ error: err.message }));
 });
 
+router.post('/list-certificates', (req, res, next) => {
+  const {body} = req;
+  const plcclr = new apiPlcclr();
+
+  plcclr.listCertificates(body)
+  .then(({data}) => res.status(200).json({ data: data }))
+  .catch(err => res.status(500).json({ error: err.message }));
+});
+
 module.exports = router;

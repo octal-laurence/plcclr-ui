@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,7 +189,7 @@ function getCertificate(id) {
 
 function listCertificates() {
   var filter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])('/post-test', filter);
+  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/list-certificates"), filter);
 }
 
 
@@ -311,7 +311,7 @@ function (_React$Component) {
       suffix: {
         label: 'suffix'
       },
-      address: {
+      addressComplete: {
         label: 'address'
       },
       gender: {
@@ -1301,7 +1301,7 @@ module.exports = function () {
       page: '/client/certificate'
     },
     '/certificate-list': {
-      page: '/client/certificate',
+      page: '/client/certificate/list',
       navLinks: 'certificates'
     },
     '/certificate-print': {
@@ -1318,7 +1318,7 @@ module.exports = function () {
 
 /***/ }),
 
-/***/ 3:
+/***/ 7:
 /*!*************************************************!*\
   !*** multi ./pages/client/certificate/index.js ***!
   \*************************************************/

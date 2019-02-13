@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 7);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -189,7 +189,7 @@ function getCertificate(id) {
 
 function listCertificates() {
   var filter = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])('/post-test', filter);
+  return Object(_middleware_router__WEBPACK_IMPORTED_MODULE_0__["default"])("/".concat(action, "/list-certificates"), filter);
 }
 
 
@@ -287,7 +287,7 @@ function (_React$Component) {
       Object(_model_policeClearanceCertifications__WEBPACK_IMPORTED_MODULE_7__["listCertificates"])().then(function (result) {
         _this2.setState({
           loading: false,
-          data: Object(_tester_testDataListCertificates__WEBPACK_IMPORTED_MODULE_8__["default"])()
+          data: result
         });
       }).catch(function (err) {
         _this2.setState({
@@ -307,12 +307,12 @@ function (_React$Component) {
       var dataColumns = [['@rid', 'Certificate Id', {
         link: 1,
         route: '/certificate?id='
-      }], ['plcclrId', 'Application Entry'], ['applicantName', 'Name'], ['date', 'Date']];
+      }], ['plcclrId', 'Application Entry'], ['applicantData.fullName', 'Name'], ['dateCertified', 'Certified Data']];
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["BoxTable"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Filter Name:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "text"
       }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button"
-      }, "search")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["Table"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, dataColumns.map(function (_ref) {
+      }, "search")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.state.loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Loading..."), !this.state.loading && this.state.error && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, this.state.error), !this.state.loading && !this.state.error && this.state.data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["Table"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, dataColumns.map(function (_ref) {
         var _ref2 = _slicedToArray(_ref, 2),
             acce = _ref2[0],
             header = _ref2[1];
@@ -322,11 +322,7 @@ function (_React$Component) {
         }, header);
       }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["TableBody"], {
         tblHeight: "650px"
-      }, this.state.loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-        key: 'loading'
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["Tbld"], null, "Loading...")), !this.state.loading && this.state.error && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-        key: 'error'
-      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["Tbld"], null, "Server Error...")), !this.state.loading && !this.state.error && this.state.data && this.state.data.map(function (certificate, i) {
+      }, this.state.data.map(function (certificate, i) {
         return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
           key: i
         }, dataColumns.map(function (_ref3) {
@@ -348,7 +344,7 @@ function (_React$Component) {
             var value;
             keys.map(function (key) {
               if (key != '') {
-                value = value === undefined ? data[key] : value[key];
+                value = value === undefined ? certificate[key] : value[key];
               }
             });
             return value;
@@ -1057,7 +1053,7 @@ module.exports = function () {
       page: '/client/certificate'
     },
     '/certificate-list': {
-      page: '/client/certificate',
+      page: '/client/certificate/list',
       navLinks: 'certificates'
     },
     '/certificate-print': {
@@ -1104,7 +1100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 7:
+/***/ 3:
 /*!************************************************!*\
   !*** multi ./pages/client/certificate/list.js ***!
   \************************************************/

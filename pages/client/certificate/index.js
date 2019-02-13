@@ -37,7 +37,7 @@ class Certificate extends React.Component {
       lastName: { label: 'last name' },
       middleName: { label: 'middle name' },
       suffix: { label: 'suffix' },
-      address: { label: 'address' },
+      addressComplete: { label: 'address' },
       gender: { label: 'gender' },
       civilStatus: { label: 'civil status' },
       citizenship: { label: 'citizenship' },

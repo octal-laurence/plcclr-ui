@@ -31,7 +31,7 @@ function getCertificate(id) {
 }
 
 function listCertificates(filter = {}) {
-  return router('/post-test', filter);
+  return router(`/${action}/list-certificates`, filter);
 }
 
 export {
@@ -42,5 +42,5 @@ export {
   getApplicationEntry,
   grantCertificate,
   getCertificate,
-  listCertificates,
+  listCertificates
 }

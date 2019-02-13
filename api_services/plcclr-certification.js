@@ -75,6 +75,11 @@ class Plcclr {
       this.request('getCertificate', {id})
     );
   }
+  listCertificates(filter={}) {
+    return this.post(
+      this.request('listCertificates', filter)
+    );
+  }
 }
 
 module.exports = Plcclr;

@@ -18,7 +18,7 @@ module.exports = () => {
       page: '/client/certificate'
     },
     '/certificate-list': {
-      page: '/client/certificate',
+      page: '/client/certificate/list',
       navLinks: 'certificates'
     },
     '/certificate-print': {

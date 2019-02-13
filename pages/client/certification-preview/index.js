@@ -27,6 +27,7 @@ class CertificationPreview extends React.Component {
           certification: {},
           certificate: {
             verifiedByName: '',
+            verifiedByName: '',
             verifiedByTitle: '',
             certifiedByName: '',
             certifiedByTitle: '',
@@ -122,6 +123,7 @@ class CertificationPreview extends React.Component {
       plcclrId: `#${this.state.applicant.data.certification['@rid']}`,
       machineId: this.state.applicant.data.certification.machineId,
       station: this.state.applicant.data.certification.station,
+      purpose: this.state.applicant.data.certification.purpose,
       applicantId: `#${this.state.applicant.data.applicant['@rid']}`,
       findings: this.state.applicant.data.certificate.findings,
       verifiedBy: {

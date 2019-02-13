@@ -41,6 +41,7 @@ class CertificationEntries extends React.Component {
       pgSkip: this.state.certificationEntries.page,
     })
     .then(result => {
+      console.log(result);
       this.setState({
         certificationEntries: {
           ...this.state.certificationEntries,

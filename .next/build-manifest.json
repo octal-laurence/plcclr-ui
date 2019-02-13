@@ -11,10 +11,6 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/client/certificate": [
-      "static/runtime/webpack.js",
-      "static/runtime/main.js"
-    ],
     "/client/certificate/list": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"

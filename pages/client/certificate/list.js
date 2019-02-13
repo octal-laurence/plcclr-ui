@@ -15,7 +15,6 @@ import {
 } from 'pages/ui/library/tableCP/table';
 
 import { listCertificates } from 'model/policeClearanceCertifications';
-import testListCertificatesList from 'tester/testDataListCertificates';
 
 class List extends React.Component {
   constructor(props) {

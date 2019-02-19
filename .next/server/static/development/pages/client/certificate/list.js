@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -214,18 +214,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wrapper__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../wrapper */ "./pages/wrapper/index.js");
 /* harmony import */ var _layout__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../layout */ "./pages/layout/index.js");
 /* harmony import */ var _ui_box__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../ui/box */ "./pages/ui/box.js");
-/* harmony import */ var _ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../ui/library/tableCP/table */ "./pages/ui/library/tableCP/table.js");
+/* harmony import */ var _ui_library_tableCP__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../ui/library/tableCP */ "./pages/ui/library/tableCP/index.js");
 /* harmony import */ var _model_policeClearanceCertifications__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../model/policeClearanceCertifications */ "./model/policeClearanceCertifications.js");
-/* harmony import */ var _tester_testDataListCertificates__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../tester/testDataListCertificates */ "./tester/testDataListCertificates.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -252,7 +243,6 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 
 
 
-
 var List =
 /*#__PURE__*/
 function (_React$Component) {
@@ -264,104 +254,30 @@ function (_React$Component) {
     _classCallCheck(this, List);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(List).call(this, props));
-    _this.state = {
-      loading: false,
-      error: '',
-      data: []
-    };
-    _this.renderTableCP = _this.renderTableCP.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.listCertificates = _this.listCertificates.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    _this.listCertificatesTableCP = _this.listCertificatesTableCP.bind(_assertThisInitialized(_assertThisInitialized(_this)));
     return _this;
   }
 
   _createClass(List, [{
-    key: "listCertificates",
-    value: function listCertificates() {
-      var _this2 = this;
-
-      this.setState({
-        loading: true,
-        error: ''
+    key: "listCertificatesTableCP",
+    value: function listCertificatesTableCP(query) {
+      return Object(_model_policeClearanceCertifications__WEBPACK_IMPORTED_MODULE_7__["listCertificates"])({
+        pgSkip: query.skip,
+        pgLimit: query.rows
       });
-
-      Object(_model_policeClearanceCertifications__WEBPACK_IMPORTED_MODULE_7__["listCertificates"])().then(function (result) {
-        _this2.setState({
-          loading: false,
-          data: result
-        });
-      }).catch(function (err) {
-        _this2.setState({
-          loading: false,
-          error: err.message
-        });
-      });
-    }
-  }, {
-    key: "componentWillMount",
-    value: function componentWillMount() {
-      this.listCertificates();
-    }
-  }, {
-    key: "renderTableCP",
-    value: function renderTableCP() {
-      var dataColumns = [['@rid', 'Certificate Id', {
-        link: 1,
-        route: '/certificate?id='
-      }], ['plcclrId', 'Application Entry'], ['applicantData.fullName', 'Name'], ['dateCertified', 'Certified Data']];
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["BoxTable"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Filter Name:\xA0", react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
-        type: "text"
-      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-        type: "button"
-      }, "search")), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("br", null), this.state.loading && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, "Loading..."), !this.state.loading && this.state.error && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_box__WEBPACK_IMPORTED_MODULE_5__["default"], null, this.state.error), !this.state.loading && !this.state.error && this.state.data && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["Table"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, dataColumns.map(function (_ref) {
-        var _ref2 = _slicedToArray(_ref, 2),
-            acce = _ref2[0],
-            header = _ref2[1];
-
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["Tblh"], {
-          key: acce
-        }, header);
-      }))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["TableBody"], {
-        tblHeight: "650px"
-      }, this.state.data.map(function (certificate, i) {
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
-          key: i
-        }, dataColumns.map(function (_ref3) {
-          var _ref4 = _slicedToArray(_ref3, 3),
-              accessor = _ref4[0],
-              _ref4$ = _ref4[2],
-              linkOpt = _ref4$ === void 0 ? {} : _ref4$;
-
-          var link = linkOpt.link,
-              route = linkOpt.route;
-
-          var tblData = function (input) {
-            var keys = input.split('.');
-
-            if (!(keys.length > 1)) {
-              return certificate[input];
-            }
-
-            var value;
-            keys.map(function (key) {
-              if (key != '') {
-                value = value === undefined ? certificate[key] : value[key];
-              }
-            });
-            return value;
-          }(accessor);
-
-          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP_table__WEBPACK_IMPORTED_MODULE_6__["Tbld"], {
-            key: accessor
-          }, link && link === 1 && route && route != "" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
-            href: "".concat(route).concat(tblData)
-          }, tblData) : tblData);
-        }));
-      }))));
     }
   }, {
     key: "render",
     value: function render() {
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout__WEBPACK_IMPORTED_MODULE_4__["default"], null, this.renderTableCP());
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_layout__WEBPACK_IMPORTED_MODULE_4__["default"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_ui_library_tableCP__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        columns: [['@rid', 'Certificate Id', {
+          link: 1,
+          route: '/certificate?id='
+        }], ['plcclrId', 'Application Entry'], ['applicantData.fullName', 'Name'], ['dateCertified', 'Certified Data']],
+        searchFields: [['applicantData.fullName', 'Name']],
+        rows: 20,
+        getData: this.listCertificatesTableCP
+      }));
     }
   }]);
 
@@ -868,6 +784,233 @@ function Header(props) {
 
 /***/ }),
 
+/***/ "./pages/ui/library/tableCP/index.js":
+/*!*******************************************!*\
+  !*** ./pages/ui/library/tableCP/index.js ***!
+  \*******************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _table__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./table */ "./pages/ui/library/tableCP/table.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; var ownKeys = Object.keys(source); if (typeof Object.getOwnPropertySymbols === 'function') { ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) { return Object.getOwnPropertyDescriptor(source, sym).enumerable; })); } ownKeys.forEach(function (key) { _defineProperty(target, key, source[key]); }); } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+
+
+
+var TableCP =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(TableCP, _React$Component);
+
+  function TableCP(props) {
+    var _this;
+
+    _classCallCheck(this, TableCP);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TableCP).call(this, props)); // props
+    // getData = function return { data }
+    // columns = table column headers [[accessor,header,link(1:0)]]
+    // rows = table number rows to display
+    // searchFields = table search field [[accessor, label]]
+
+    _this.state = {
+      dataSet: 'new',
+      data: {
+        loading: false,
+        hasFetchedAll: false,
+        data: [],
+        page: 1
+      }
+    }; // table shaping
+
+    _this.tblHeight = props.tblHeight || "450px"; // bindings
+
+    _this.getData = _this.getData.bind(_assertThisInitialized(_assertThisInitialized(_this)));
+    return _this;
+  }
+
+  _createClass(TableCP, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      this.props.getData && this.getData();
+    }
+  }, {
+    key: "updateStateData",
+    value: function updateStateData(obj) {
+      this.setState({
+        data: _objectSpread({}, this.state.data, obj)
+      });
+    }
+  }, {
+    key: "getData",
+    value: function getData() {
+      var _this2 = this;
+
+      this.updateStateData({
+        loading: true,
+        error: ''
+      });
+      this.props.getData({
+        search: {},
+        filter: {},
+        skip: this.state.data.page,
+        rows: this.props.rows || 20
+      }).then(function (data) {
+        var initialRecords = _this2.state.dataSet === 'series' ? _this2.state.data.data : [];
+
+        _this2.updateStateData({
+          loading: false,
+          hasFetchedAll: !(data.length > 0),
+          page: _this2.state.data.page + 1,
+          data: _toConsumableArray(initialRecords).concat(_toConsumableArray(data))
+        });
+      }).catch(function (err) {
+        _this2.updateStateData({
+          loading: false,
+          error: err.message
+        });
+      });
+    }
+  }, {
+    key: "render",
+    value: function render() {
+      var _this3 = this;
+
+      // tblColumn accessor,header,link(1:0)
+      var tblColumn = this.props.columns || [];
+      var tblData = this.state.data.data;
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_table__WEBPACK_IMPORTED_MODULE_1__["BoxTable"], null, this.props.searchFields && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Search By:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.searchFields.map(function (_ref, i) {
+        var _ref2 = _slicedToArray(_ref, 2),
+            field = _ref2[0],
+            label = _ref2[1];
+
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+          type: "radio",
+          name: "searchFields",
+          checked: i === 0 ? 1 : ""
+        }), " ", label);
+      })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        type: "input",
+        name: "searchText",
+        width: "15%"
+      }), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        onClick: function onClick(e) {
+          _this3.setState({
+            dataSet: 'new',
+            data: _objectSpread({}, _this3.state.data, {
+              page: 1
+            })
+          }, function () {
+            _this3.getData();
+          });
+        }
+      }, "search"))), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_table__WEBPACK_IMPORTED_MODULE_1__["Table"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_table__WEBPACK_IMPORTED_MODULE_1__["TableHead"], null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", null, tblColumn.map(function (_ref3) {
+        var _ref4 = _slicedToArray(_ref3, 2),
+            acce = _ref4[0],
+            header = _ref4[1];
+
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_table__WEBPACK_IMPORTED_MODULE_1__["Tblh"], {
+          key: acce
+        }, header);
+      }))), !this.state.data.loading && !this.state.data.error ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_table__WEBPACK_IMPORTED_MODULE_1__["TableBody"], {
+        tblHeight: this.tblHeight
+      }, tblData.map(function (data, i) {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tr", {
+          key: i
+        }, tblColumn.map(function (_ref5) {
+          var _ref6 = _slicedToArray(_ref5, 3),
+              accessor = _ref6[0],
+              _ref6$ = _ref6[2],
+              linkOpt = _ref6$ === void 0 ? {} : _ref6$;
+
+          var link = linkOpt.link,
+              route = linkOpt.route;
+
+          var tblData = function (input) {
+            var keys = input.split('.');
+
+            if (!(keys.length > 1)) {
+              return data[input];
+            }
+
+            var value;
+            keys.map(function (key) {
+              if (key !== '') {
+                value = value === undefined ? data[key] : value[key];
+              }
+            });
+            return value;
+          }(accessor);
+
+          return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_table__WEBPACK_IMPORTED_MODULE_1__["Tbld"], {
+            key: accessor
+          }, link && link === 1 && route && route !== "" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
+            href: "".concat(route).concat(tblData)
+          }, tblData) : tblData);
+        }));
+      })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        align: "center"
+      }, this.state.data.loading && "Loading...", !this.state.data.loading && (this.state.data.hasFetchedAll ? "No more result." : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        type: "button",
+        onClick: function onClick(e) {
+          _this3.setState({
+            dataSet: 'series'
+          });
+
+          _this3.getData();
+        }
+      }, "load more"))));
+    }
+  }]);
+
+  return TableCP;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
+
+/* harmony default export */ __webpack_exports__["default"] = (TableCP);
+
+/***/ }),
+
 /***/ "./pages/ui/library/tableCP/table.js":
 /*!*******************************************!*\
   !*** ./pages/ui/library/tableCP/table.js ***!
@@ -1070,37 +1213,7 @@ module.exports = function () {
 
 /***/ }),
 
-/***/ "./tester/testDataListCertificates.js":
-/*!********************************************!*\
-  !*** ./tester/testDataListCertificates.js ***!
-  \********************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = (function () {
-  return [{
-    '@rid': '18:26',
-    applicantName: 'John Laurence P. Geroy',
-    plcclrId: '12:199',
-    date: '2019-02-08 11:15:17'
-  }, {
-    '@rid': '18:25',
-    applicantName: 'John Laurence P. Geroy',
-    plcclrId: '12:198',
-    date: '2019-02-08 10:34:49'
-  }, {
-    '@rid': '18:24',
-    applicantName: 'John Laurence P. Geroy',
-    plcclrId: '12:184',
-    date: '2019-02-08 11:15:17'
-  }];
-});
-
-/***/ }),
-
-/***/ 3:
+/***/ 4:
 /*!************************************************!*\
   !*** multi ./pages/client/certificate/list.js ***!
   \************************************************/

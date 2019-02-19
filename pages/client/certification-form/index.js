@@ -20,6 +20,7 @@ import ApplicantInfoSummary from './summary';
 import post from '../../../middleware/router';
 import {newApplicationEntry, editApplicationEntry, getApplicationEntry} from 'model/policeClearanceCertifications';
 
+
 class CertificationForm extends React.Component {
   constructor(props) {
     super(props);
@@ -197,7 +198,7 @@ class CertificationForm extends React.Component {
             ...obj,
             [k]: applicant[k]
            }), {}),
-          purpose: certification.purpose
+          purpose: certification.purpose,
         },
         applicantIDPhoto: {
           blob: applicant.applicantIDPhoto

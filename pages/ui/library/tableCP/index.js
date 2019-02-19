@@ -1,8 +1,5 @@
 import React from 'react';
 
-// misc
-import post from './middleware/router';
-
 import {
   Table,
   TableHead,
@@ -15,6 +12,11 @@ import {
 class TableCP extends React.Component {
   constructor(props) {
     super(props);
+    // props
+    // getData = function return { data }
+    // columns = table column headers [[accessor,header,link(1:0)]]
+    // rows = table number rows to display
+    // searchFields = table search field [[accessor, label]]
 
     this.state = {
       dataSet: 'new',
@@ -26,18 +28,14 @@ class TableCP extends React.Component {
       }
     };
 
-    // table data functions
-    // receive data should be array
-    this.serverSideRoute = props.serverSideRoute || ``;
-
     // table shaping
-    this.tblHeight = props.tblHeight || `600px`;
+    this.tblHeight = props.tblHeight || `450px`;
 
     // bindings
     this.getData = this.getData.bind(this);
   }
   componentDidMount() {
-    this.getData();
+    this.props.getData && this.getData();
   }
   updateStateData (obj) {
     this.setState({
@@ -48,13 +46,18 @@ class TableCP extends React.Component {
     });
   }
   getData() {
-    this.updateStateData({ loading: true });
+    this.updateStateData({ 
+      loading: true, 
+      error: '' 
+    });
 
-    post(this.serverSideRoute, {
-      pgSkip: this.state.data.page,
+    this.props.getData({
+      search: {},
+      filter: {},
+      skip: this.state.data.page,
+      rows: this.props.rows || 20
     })
     .then(data => {
-      // extract record (new or series)
       const initialRecords = this.state.dataSet === 'series' ? this.state.data.data : [];
       this.updateStateData({
         loading: false,
@@ -67,7 +70,10 @@ class TableCP extends React.Component {
       });
     })
     .catch(err => {
-      this.updateStateData({ loading: false, error: err.message });
+      this.updateStateData({
+        loading: false,
+        error: err.message,
+      });
     });
   }
   render() {
@@ -77,25 +83,44 @@ class TableCP extends React.Component {
 
     return (
       <BoxTable>
-        <div>
-          Filter Name:&nbsp;<input type="text"/>
-          <button
-            type="button"
-            onClick={e => {
-              this.setState({
-                dataSet: 'new',
-                data: {
-                  ...this.state.data,
-                  page: 1,
-                }
-              }, () => {
-                this.getData();
-              });
-            }}
-          >
-            search
-          </button>
-        </div><br />
+        { this.props.searchFields &&
+          <div>
+            <div>
+              Search By:
+            </div>
+            <div>
+              { this.props.searchFields.map(([field, label], i) => (
+                  <div>
+                    <input
+                      type="radio"
+                      name="searchFields"
+                      checked={(i === 0) ? 1 : ``}
+                    /> {label}
+                  </div>
+                ))
+              }
+            </div>
+            <div>
+              <input type="input" name="searchText" width="15%" />
+              <button
+                type="button"
+                onClick={e => {
+                  this.setState({
+                    dataSet: 'new',
+                    data: {
+                      ...this.state.data,
+                      page: 1,
+                    }
+                  }, () => {
+                    this.getData();
+                  });
+                }}
+              >
+                search
+              </button>
+            </div>
+          </div>
+        }
         <Table>
           <TableHead>
             <tr>
@@ -105,44 +130,47 @@ class TableCP extends React.Component {
               }
             </tr>
           </TableHead>
-          <TableBody tblHeight={this.tblHeight}>
-            { tblData.map((data, i) => (
-                <tr key={i}>
-                  { tblColumn.map(([accessor, , linkOpt={}]) => {
-                    const {link, route} = linkOpt;
-                    const tblData = ((input) => {
-                      const keys = input.split('.');
-                      if (!(keys.length > 1)) {
-                        return data[input];
-                      }
-
-                      let value;
-                      keys.map(key => {
-                        if (key != '') {
-                          value = (value === undefined) ? data[key] : value[key];
+          { (!this.state.data.loading && !this.state.data.error) ? 
+            <TableBody tblHeight={this.tblHeight}>
+              { tblData.map((data, i) => (
+                  <tr key={i}>
+                    { tblColumn.map(([accessor, , linkOpt={}]) => {
+                      const {link, route} = linkOpt;
+                      const tblData = ((input) => {
+                        const keys = input.split('.');
+                        if (!(keys.length > 1)) {
+                          return data[input];
                         }
-                      });
-                      return value
-                    })(accessor);
-                    return (
-                        <Tbld key={accessor}>
-                          { ((link && link === 1) && (route && route != ``)) ?
-                            <a href={`${route}${tblData}`} >{tblData}</a>
-                            :
-                            tblData
+
+                        let value;
+                        keys.map(key => {
+                          if (key !== '') {
+                            value = (value === undefined) ? data[key] : value[key];
                           }
-                        </Tbld>
-                      )
-                    })
-                  }
-                </tr>
-              ))
-            }
-          </TableBody>
+                        });
+                        return value
+                      })(accessor);
+                      return (
+                          <Tbld key={accessor}>
+                            { ((link && link === 1) && (route && route !== ``)) ?
+                              <a href={`${route}${tblData}`} >{tblData}</a>
+                              :
+                              tblData
+                            }
+                          </Tbld>
+                        )
+                      })
+                    }
+                  </tr>
+                ))
+              }
+            </TableBody>
+            :
+            <tbody></tbody>
+          }
         </Table>
         <div align="center">
-          { this.state.data.loading }
-          { this.state.data.loading && `loading...` }
+          { this.state.data.loading && `Loading...` }
           { !this.state.data.loading &&
             (this.state.data.hasFetchedAll ?
               `No more result.`

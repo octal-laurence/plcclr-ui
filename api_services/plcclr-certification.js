@@ -59,10 +59,7 @@ class Plcclr {
   }
   listApplicationEntry(filter = {}) {
     return this.post(
-      this.request('listApplicationEntries', {
-        ...filter,
-        pgLimit: 20,
-      })
+      this.request('listApplicationEntries', filter)
     );
   }
   grantCertificate(application) {

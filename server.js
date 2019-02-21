@@ -4,6 +4,7 @@ const next = require('next');
 const { parse } = require('url');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
+const config = require('config');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({ dev });
@@ -16,7 +17,7 @@ const policeClearanceCertification = require('./routes/model/policeClearanceCert
 app.prepare()
 .then(() => {
   const server = express();
-  const PORT = process.env.PORT || 3000;
+  const PORT = config.get('PORT') || 3000;
   server.use(express.json({ limit: '10mb' }));
   server.use(express.urlencoded({ extended: true, limit: '10mb' }));
   server.use(cookieParser());

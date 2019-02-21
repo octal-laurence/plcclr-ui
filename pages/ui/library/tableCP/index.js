@@ -84,17 +84,17 @@ class TableCP extends React.Component {
     return (
       <BoxTable>
         { this.props.searchFields &&
-          <div>
+          <div style={{'paddingBottom': '20px'}}>
             <div>
               Search By:
             </div>
             <div>
               { this.props.searchFields.map(([field, label], i) => (
-                  <div>
+                  <div key={label}>
                     <input
                       type="radio"
                       name="searchFields"
-                      checked={(i === 0) ? 1 : ``}
+                      defaultChecked={(i === 0) ? 1 : ``}
                     /> {label}
                   </div>
                 ))
@@ -143,7 +143,7 @@ class TableCP extends React.Component {
                         }
 
                         let value;
-                        keys.map(key => {
+                        keys.forEach(key => {
                           if (key !== '') {
                             value = (value === undefined) ? data[key] : value[key];
                           }
@@ -151,7 +151,7 @@ class TableCP extends React.Component {
                         return value
                       })(accessor);
                       return (
-                          <Tbld key={accessor}>
+                          <Tbld key={`${accessor}${i}`}>
                             { ((link && link === 1) && (route && route !== ``)) ?
                               <a href={`${route}${tblData}`} >{tblData}</a>
                               :
@@ -169,7 +169,7 @@ class TableCP extends React.Component {
             <tbody></tbody>
           }
         </Table>
-        <div align="center">
+        <div align="center" style={{padding: '20px'}}>
           { this.state.data.loading && `Loading...` }
           { !this.state.data.loading &&
             (this.state.data.hasFetchedAll ?

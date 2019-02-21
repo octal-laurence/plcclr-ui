@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -919,15 +919,21 @@ function (_React$Component) {
       // tblColumn accessor,header,link(1:0)
       var tblColumn = this.props.columns || [];
       var tblData = this.state.data.data;
-      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_table__WEBPACK_IMPORTED_MODULE_1__["BoxTable"], null, this.props.searchFields && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Search By:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.searchFields.map(function (_ref, i) {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_table__WEBPACK_IMPORTED_MODULE_1__["BoxTable"], null, this.props.searchFields && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        style: {
+          'paddingBottom': '20px'
+        }
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, "Search By:"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, this.props.searchFields.map(function (_ref, i) {
         var _ref2 = _slicedToArray(_ref, 2),
             field = _ref2[0],
             label = _ref2[1];
 
-        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
+        return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+          key: label
+        }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
           type: "radio",
           name: "searchFields",
-          checked: i === 0 ? 1 : ""
+          defaultChecked: i === 0 ? 1 : ""
         }), " ", label);
       })), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", null, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("input", {
         type: "input",
@@ -975,7 +981,7 @@ function (_React$Component) {
             }
 
             var value;
-            keys.map(function (key) {
+            keys.forEach(function (key) {
               if (key !== '') {
                 value = value === undefined ? data[key] : value[key];
               }
@@ -984,13 +990,16 @@ function (_React$Component) {
           }(accessor);
 
           return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement(_table__WEBPACK_IMPORTED_MODULE_1__["Tbld"], {
-            key: accessor
+            key: "".concat(accessor).concat(i)
           }, link && link === 1 && route && route !== "" ? react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("a", {
             href: "".concat(route).concat(tblData)
           }, tblData) : tblData);
         }));
       })) : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("tbody", null)), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-        align: "center"
+        align: "center",
+        style: {
+          padding: '20px'
+        }
       }, this.state.data.loading && "Loading...", !this.state.data.loading && (this.state.data.hasFetchedAll ? "No more result." : react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
         type: "button",
         onClick: function onClick(e) {
@@ -1213,7 +1222,7 @@ module.exports = function () {
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!************************************************!*\
   !*** multi ./pages/client/certificate/list.js ***!
   \************************************************/

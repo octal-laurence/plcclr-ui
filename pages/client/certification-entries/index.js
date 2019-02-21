@@ -40,6 +40,7 @@ class CertificationEntries extends React.Component {
               ['dateCreated', 'Date Created'],
               ['status', 'Status']
             ]}
+            searchFields={[['applicantData.fullName', 'Name']]}
             rows={20}
             getData={this.listCertificationEntriesTableCP}
           />

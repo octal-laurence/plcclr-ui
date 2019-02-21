@@ -8,6 +8,7 @@ import Button from '../../ui/button';
 class Summary extends React.Component {
   constructor(props) {
     super(props);
+    console.log(props.supreme.state.applicantInfo)
   }
   render() {
     const supreme = this.props.supreme;
@@ -50,6 +51,7 @@ class Summary extends React.Component {
         <hr />
         <Box>
           { Object.entries(supreme.state.applicantInfo)
+            .filter(([k, v]) => applicantInfo.hasOwnProperty(k))
             .map(([k, v]) => [(
               <Box key={k}>
                 {applicantInfo[k].label} :&nbsp;

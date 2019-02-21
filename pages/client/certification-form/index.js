@@ -17,7 +17,6 @@ import ApplicantSignature from './signature';
 import ApplicantInfoSummary from './summary';
 
 // misc
-import post from '../../../middleware/router';
 import {newApplicationEntry, editApplicationEntry, getApplicationEntry} from 'model/policeClearanceCertifications';
 
 
@@ -198,6 +197,7 @@ class CertificationForm extends React.Component {
             ...obj,
             [k]: applicant[k]
            }), {}),
+          ...address,
           purpose: certification.purpose,
         },
         applicantIDPhoto: {
@@ -252,45 +252,51 @@ class CertificationForm extends React.Component {
       <Layout
         inSidebarNavLink={this.props.router.asPath}
       >
-        <Box>
-          { this.renderNavTabs() }
-          <Box id="formContents" className="container">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                this.submitApplicantEntry();
-              }}
-            >
-              { this.state.navTabs.applicantInfo === 1 && 
-                <ApplicantInfo supreme={this} /> 
-              }
-              { this.state.navTabs.applicantIDPhoto === 1 &&
-                <ApplicantIDPhoto supreme={this} />
-              }
-              { this.state.navTabs.applicantFingerPrint === 1 &&
-                <ApplicantFingerPrint supreme={this} />
-              }
-              { this.state.navTabs.applicantSignature === 1 &&
-                <ApplicantSignature supreme={this} />
-              }
-              { this.state.navTabs.finalization === 1 &&
-                <Box>
-                  <ApplicantInfoSummary supreme={this} />
-                  <hr />
-                  <Box className="container" align="right">
-                    { this.state.editing.loading ?
-                      <label>Please Wait, Record is on Processing...</label>
-                      :
-                      <Button type="submit">
-                        Save
-                      </Button>
-                    }
-                  </Box>
-                </Box>
-              }
-            </form>
+        { (!this.state.addMode && this.state.editing.loading) ?
+          <Box>
+            Loading...
           </Box>
-        </Box>
+          :
+          <Box>
+            { this.renderNavTabs() }
+            <Box id="formContents" className="container">
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  this.submitApplicantEntry();
+                }}
+              >
+                { this.state.navTabs.applicantInfo === 1 && 
+                  <ApplicantInfo supreme={this} /> 
+                }
+                { this.state.navTabs.applicantIDPhoto === 1 &&
+                  <ApplicantIDPhoto supreme={this} />
+                }
+                { this.state.navTabs.applicantFingerPrint === 1 &&
+                  <ApplicantFingerPrint supreme={this} />
+                }
+                { this.state.navTabs.applicantSignature === 1 &&
+                  <ApplicantSignature supreme={this} />
+                }
+                { this.state.navTabs.finalization === 1 &&
+                  <Box>
+                    <ApplicantInfoSummary supreme={this} />
+                    <hr />
+                    <Box className="container" align="right">
+                      { this.state.editing.loading ?
+                        <label>Please Wait, Record is on Processing...</label>
+                        :
+                        <Button type="submit">
+                          Save
+                        </Button>
+                      }
+                    </Box>
+                  </Box>
+                }
+              </form>
+            </Box>
+          </Box>
+        }
         <Head>
           <title>Police Clearance</title>
 

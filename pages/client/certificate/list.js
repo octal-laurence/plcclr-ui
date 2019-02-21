@@ -33,6 +33,7 @@ class List extends React.Component {
             ]}
             rows={20}
             getData={this.listCertificatesTableCP}
+            filterDate={{ fieldName: 'dateCertified', label: 'Date Certified' }}
           />
       </Layout>
     );

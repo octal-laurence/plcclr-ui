@@ -17,6 +17,7 @@ class TableCP extends React.Component {
     // columns = table column headers [[accessor,header,link(1:0)]]
     // rows = table number rows to display
     // searchFields = table search field [[accessor, label]]
+    // filterDate = {fieldName, label}
 
     this.state = {
       dataSet: 'new',
@@ -25,6 +26,10 @@ class TableCP extends React.Component {
         hasFetchedAll: false,
         data: [],
         page: 1,
+      },
+      dateFilter: {
+        from: '',
+        to: ''
       }
     };
 
@@ -33,6 +38,17 @@ class TableCP extends React.Component {
 
     // bindings
     this.getData = this.getData.bind(this);
+    this.filterDateHandlers = this.filterDateHandlers.bind(this);
+  }
+  filterDateHandlers(e) {
+    const {name, value} = e.target;
+
+    this.setState({
+      dateFilter: {
+        ...this.state.dateFilter,
+        [name]: value
+      }
+    });
   }
   componentDidMount() {
     this.props.getData && this.getData();
@@ -51,11 +67,16 @@ class TableCP extends React.Component {
       error: '' 
     });
 
+    // filters
+    const dateFilter = (this.props.filterDate && this.state.dateFilter.from && this.state.dateFilter.to) ?
+                       {[this.props.filterDate.fieldName]: this.state.dateFilter}
+                       :
+                       {};
+
     this.props.getData({
-      search: {},
-      filter: {},
       skip: this.state.data.page,
-      rows: this.props.rows || 20
+      rows: this.props.rows || 20,
+      ...dateFilter
     })
     .then(data => {
       const initialRecords = this.state.dataSet === 'series' ? this.state.data.data : [];
@@ -83,25 +104,18 @@ class TableCP extends React.Component {
 
     return (
       <BoxTable>
-        { this.props.searchFields &&
+        { this.props.filterDate && 
           <div style={{'paddingBottom': '20px'}}>
             <div>
-              Search By:
+              { `${this.props.filterDate.label}:` }
             </div>
             <div>
-              { this.props.searchFields.map(([field, label], i) => (
-                  <div key={label}>
-                    <input
-                      type="radio"
-                      name="searchFields"
-                      defaultChecked={(i === 0) ? 1 : ``}
-                    /> {label}
-                  </div>
-                ))
-              }
-            </div>
-            <div>
-              <input type="input" name="searchText" width="15%" />
+              From:&nbsp;
+              <input type="date" name="from" onChange={this.filterDateHandlers} />
+              &nbsp;
+              To:&nbsp;
+              <input type="date" name="to" onChange={this.filterDateHandlers} />
+              &nbsp;
               <button
                 type="button"
                 onClick={e => {
@@ -116,7 +130,7 @@ class TableCP extends React.Component {
                   });
                 }}
               >
-                search
+                Filter
               </button>
             </div>
           </div>
@@ -178,9 +192,7 @@ class TableCP extends React.Component {
               <button
                 type="button"
                 onClick={e => {
-                  this.setState({
-                    dataSet: 'series',
-                  });
+                  this.setState({ dataSet: 'series' });
                   this.getData();
                 }}
               >

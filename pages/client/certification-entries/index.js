@@ -20,10 +20,17 @@ class CertificationEntries extends React.Component {
     this.listCertificationEntriesTableCP = this.listCertificationEntriesTableCP.bind(this);
   }
   listCertificationEntriesTableCP(query) {
-    return listCertificationEntries({
-      pgSkip: query.skip,
-      pgLimit: query.rows
-    });
+    const { skip, rows } = query;
+    const opts = {
+      pgSkip: skip,
+      pgLimit: rows,
+    };
+
+    if (query.hasOwnProperty('dateCreated')) {
+      opts.dateCreated = query.dateCreated.from
+    }
+
+    return listCertificationEntries(opts);
   }
   render() {
     return (
@@ -42,6 +49,7 @@ class CertificationEntries extends React.Component {
             ]}
             rows={20}
             getData={this.listCertificationEntriesTableCP}
+            filterDate={{ fieldName: 'dateCreated', label: 'Date Created' }}
           />
         </Box>
       </Layout>

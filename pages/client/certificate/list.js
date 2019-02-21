@@ -31,7 +31,6 @@ class List extends React.Component {
               ['applicantData.fullName', 'Name'],
               ['dateCertified', 'Certified Data']
             ]}
-            searchFields={[['applicantData.fullName', 'Name']]}
             rows={20}
             getData={this.listCertificatesTableCP}
           />

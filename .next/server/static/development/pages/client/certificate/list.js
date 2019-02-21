@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -274,7 +274,6 @@ function (_React$Component) {
           link: 1,
           route: '/certificate?id='
         }], ['plcclrId', 'Application Entry'], ['applicantData.fullName', 'Name'], ['dateCertified', 'Certified Data']],
-        searchFields: [['applicantData.fullName', 'Name']],
         rows: 20,
         getData: this.listCertificatesTableCP
       }));
@@ -1222,7 +1221,7 @@ module.exports = function () {
 
 /***/ }),
 
-/***/ 3:
+/***/ 6:
 /*!************************************************!*\
   !*** multi ./pages/client/certificate/list.js ***!
   \************************************************/

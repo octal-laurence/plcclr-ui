@@ -1,3 +1,4 @@
 /node_modules
 /tester
 /.next
+/config/local.json

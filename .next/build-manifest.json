@@ -15,7 +15,7 @@
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
-    "/client/certification-preview": [
+    "/client/certificate/list": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ]

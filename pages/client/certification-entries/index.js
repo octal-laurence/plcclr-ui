@@ -27,7 +27,7 @@ class CertificationEntries extends React.Component {
     };
 
     if (query.hasOwnProperty('dateCreated')) {
-      opts.dateCreated = query.dateCreated.from
+      opts.dateCreated = query.dateCreated;
     }
 
     return listCertificationEntries(opts);

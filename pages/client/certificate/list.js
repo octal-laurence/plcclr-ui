@@ -16,10 +16,17 @@ class List extends React.Component {
     this.listCertificatesTableCP = this.listCertificatesTableCP.bind(this);
   }
   listCertificatesTableCP(query) {
-    return listCertificates({
-      pgSkip: query.skip,
-      pgLimit: query.rows
-    });
+    const { skip, rows } = query;
+    const opts = {
+      pgSkip: skip,
+      pgLimit: rows,
+    };
+
+    if (query.hasOwnProperty('dateCertified')) {
+      opts.dateCertified = query.dateCertified;
+    }
+
+    return listCertificates(opts);
   }
   render() {
     return (
